@@ -1,7 +1,21 @@
 import { Form, NavLink } from "react-router-dom"
+import { useLoginMutation } from "../features/api/apiSlice"
 
 const Login = () => {
   let location = window.location.origin
+  const data = {
+    data:{
+          email : "pascalemy2010@gmail.com",
+          password : "casdonmystery"
+        }
+}
+
+
+const [login] = useLoginMutation()
+// const getdata = (e)=>{
+//   e.preventDefault()
+//   login(data)
+// }
   return (
     <fieldset>
     <Form action="" method="post" >
