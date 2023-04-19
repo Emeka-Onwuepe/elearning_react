@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, Outlet} from "react-router-dom"
 
 function Index() {
   return (
@@ -11,6 +11,7 @@ function Index() {
     </header>
 
     <main>
+    <Outlet/>
     </main>
 
     <footer>
