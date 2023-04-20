@@ -15,7 +15,7 @@ export const elearningApi = createApi({
   endpoints: (builder) => ({
 
     login: builder.mutation({
-      query: (data) =>({
+      query: data =>({
         url: "/api/login",
         method:"POST",
         body: data

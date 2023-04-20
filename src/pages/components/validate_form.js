@@ -10,8 +10,10 @@ const ValidateForm = async({request}) => {
       }
     }
 
-
-    const [login] = useLoginMutation()
+    // const {data:red} = useLoginMutation(data)
+    // console.log(red)
+    // console.log(data)
+    // const [login] = useLoginMutation()
     // const getdata = (e)=>{
     //   e.preventDefault()
     //   login(data)
