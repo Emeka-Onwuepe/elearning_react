@@ -20,6 +20,8 @@ export const elearningApi = createApi({
         method:"POST",
         body: data
       }),
+      // transformResponse : (response,meta,arg) => response.data,
+      // transformErrorResponse : response => response.status,
       invalidatesTags: ['user']
     }),
     

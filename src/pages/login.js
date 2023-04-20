@@ -12,11 +12,15 @@ const Login = () => {
 
 
 
-const [login] = useLoginMutation()
-const  getdata = (e)=>{
+const [login,result] = useLoginMutation()
+const {isLoading,isSuccess} = result
+console.log(isSuccess)
+const  getdata = async (e)=>{
   // e.preventDefault()
-  const ggf = login(data)
-  console.log(Object.keys(ggf))
+  const res = await login(data)
+  if (res.data){
+    console.log(data)
+  }
   
 }
   return (
