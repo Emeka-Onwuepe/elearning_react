@@ -1,13 +1,12 @@
-import { NavLink, Outlet} from "react-router-dom"
+import { Outlet} from "react-router-dom"
+import Nav from "./nav"
 
 function Index() {
   return (
     <div className="bigwrapper">
     <header>
     <div className="logo">Get Light</div>
-    <nav className="navs">
-    <NavLink to="login">Login</NavLink>
-    </nav>
+    <Nav/>
     </header>
 
     <main>

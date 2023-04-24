@@ -11,7 +11,7 @@ export const elearningApi = createApi({
         return headers
     }
     }),
-  tagTypes: ['user'],
+  tagTypes: ['userlogin'],
   endpoints: (builder) => ({
 
     login: builder.mutation({
@@ -22,12 +22,22 @@ export const elearningApi = createApi({
       }),
       // transformResponse : (response,meta,arg) => response.data,
       // transformErrorResponse : response => response.status,
-      invalidatesTags: ['user']
+      invalidatesTags: ['userlogin']
     }),
-    
+
+    registerUser : builder.mutation({
+      query: data =>({
+        url: "/api/register",
+        method:"POST",
+        body: data
+      }),
+      // transformResponse : (response,meta,arg) => response.data,
+      // transformErrorResponse : response => response.status,
+      invalidatesTags: ['userlogin']
+    }),    
 
   }),
 })
 
 
-export const {useLoginMutation} = elearningApi
+export const {useLoginMutation,useRegisterUserMutation} = elearningApi
