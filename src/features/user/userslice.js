@@ -7,7 +7,7 @@ const initialState = {
     completed_course_units:[],
     completed_courses:[],
     completed_course_sets:[],
-    token:"",
+    usertoken:"",
     logedin: false,
 }
 
