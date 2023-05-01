@@ -8,6 +8,7 @@ import UserPage from "./pages/userpage";
 import RegisterUser from "./pages/register";
 import RegisterStudent from "./pages/registerStudent";
 import Course from "./pages/course";
+import Lesson from "./pages/lesson";
 
 
 export const AppRoutes =createBrowserRouter (
@@ -19,6 +20,7 @@ export const AppRoutes =createBrowserRouter (
         <Route path="register" element={<RegisterUser />} />
         <Route path="register/:schoolId" element={<RegisterStudent />} />
         <Route path="course/:id" element={<Course />} />
+        <Route path="lesson/:type/:id" element={<Lesson />} />
       </Route>
   )
   );

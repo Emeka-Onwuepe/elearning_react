@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { filterList } from '../helperfuncs'
 
 // Define a service using a base URL and expected endpoints
 const baseUrl = 'http://127.0.0.1:8000'
@@ -104,10 +105,25 @@ export const elearningApi = createApi({
         url: `/api/getcourse?id=${data.id}`,
         headers: {"Authorization": `Token ${data.token}`}
       }),
-      
-      // transformErrorResponse : response => response.status,
-      // invalidatesTags: ['userlogin']
-    }),  
+     
+    }), 
+    
+    getlesson : builder.query({
+      query: data =>({
+        url: `/api/getlesson?id=${data.id}&type=${data.type}`,
+        headers: {"Authorization": `Token ${data.token}`}
+      }),
+     
+    }), 
+
+    logout : builder.mutation({
+      query: token =>({
+        url: `/api/logout`,
+        headers: {"Authorization": `Token ${token}`},
+        method:"POST",
+      }),
+
+    })
 
   }),
 })
@@ -115,4 +131,6 @@ export const elearningApi = createApi({
 
 export const {useLoginMutation,useRegisterUserMutation,
               useRegisterStudentMutation,useGetSchoolQuery,
-              useGetCoursesQuery, useGetCourseQuery} = elearningApi
+              useGetCoursesQuery, useGetCourseQuery,useLogoutMutation,
+              useGetlessonQuery,
+              } = elearningApi
