@@ -3,12 +3,12 @@ import { Route,
   createRoutesFromElements } from "react-router-dom";
 import Index from "./pages";
 import Home from "./pages/home";
-import Login from "./pages/login";
-import UserPage from "./pages/userpage";
-import RegisterUser from "./pages/register";
-import RegisterStudent from "./pages/registerStudent";
-import Course from "./pages/course";
-import Lesson from "./pages/lesson";
+import Login from "./pages/users/login";
+import UserPage from "./pages/users/userpage";
+import RegisterUser from "./pages/users/register";
+import RegisterStudent from "./pages/users/registerStudent";
+import Course from "./pages/courses/course";
+import Lesson from "./pages/courses/lesson";
 
 
 export const AppRoutes =createBrowserRouter (

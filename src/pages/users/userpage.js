@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Link, Navigate } from "react-router-dom"
-import { useGetCoursesQuery} from "../features/api/apiSlice"
-import { addError } from "../features/error/errorSlice"
+import { useGetCoursesQuery} from "../../features/api/apiSlice"
+import { addError } from "../../features/error/errorSlice"
 import { useEffect } from "react"
 
 const UserPage = () => {

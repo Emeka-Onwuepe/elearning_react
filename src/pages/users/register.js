@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Navigate } from 'react-router-dom';
-import { useRegisterUserMutation } from '../features/api/apiSlice';
-import { createUser } from '../features/user/userslice';
+import { useRegisterUserMutation } from '../../features/api/apiSlice';
+import { createUser } from '../../features/user/userslice';
 
 const RegisterUser = () => {
 

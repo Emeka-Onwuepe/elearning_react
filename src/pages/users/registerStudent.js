@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
-import { useRegisterUserMutation, useGetSchoolQuery } from '../features/api/apiSlice'
+import { useRegisterUserMutation, useGetSchoolQuery } from '../../features/api/apiSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { createUser } from '../features/user/userslice'
+import { createUser } from '../../features/user/userslice'
 
 const RegisterStudent = () => {
     const{schoolId} = useParams()

@@ -1,8 +1,8 @@
 import { Link, Navigate, useParams } from "react-router-dom"
-import { useGetCourseQuery } from "../features/api/apiSlice"
+import { useGetCourseQuery } from "../../features/api/apiSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { addError } from "../features/error/errorSlice"
+import { addError } from "../../features/error/errorSlice"
 
 const Course = () => {
     const{id} = useParams()

@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom"
-import { useGetlessonQuery } from "../features/api/apiSlice"
+import { useGetlessonQuery } from "../../features/api/apiSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { addError } from "../features/error/errorSlice"
+import { addError } from "../../features/error/errorSlice"
 
 const Lesson = () => {
 

@@ -1,6 +1,6 @@
 import {  Link, Navigate } from "react-router-dom"
-import { useLoginMutation } from "../features/api/apiSlice"
-import { createUser } from "../features/user/userslice"
+import { useLoginMutation } from "../../features/api/apiSlice"
+import { createUser } from "../../features/user/userslice"
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 
