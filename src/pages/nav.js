@@ -25,13 +25,11 @@ useEffect(() => {
 
 const onClick = async (e)=>{
   e.preventDefault()
-  await logout(user.usertoken)
-
-  if(isSuccess){
+  const data = await logout(user.usertoken)
+ 
+  if(data){
     dispatch(logoutUser()) 
   }
-
- 
  
   
 }

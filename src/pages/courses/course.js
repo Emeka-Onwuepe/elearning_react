@@ -1,17 +1,34 @@
 import { Link, Navigate, useParams } from "react-router-dom"
 import { useGetCourseQuery } from "../../features/api/apiSlice"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { addError } from "../../features/error/errorSlice"
+import { addCourse } from "../../features/course/courseSlice"
 
 const Course = () => {
     const{id} = useParams()
-    const user = useSelector(state=>state.user)
+    const {user,course} = useSelector(state=>state)
     const dispatch = useDispatch()
     const token = user.usertoken
-   const {data,isError,error}  = useGetCourseQuery({id,token})
 
-   useEffect(() => {
+  let skip = course.course.id == id
+ 
+  const [finaldata, setfinaldata] = useState(course)
+  const {data,isError,error}  = useGetCourseQuery({id,token},{skip})
+
+  // const finaldata = skip?course:data
+
+ 
+ 
+
+  useEffect(() => {
+    if(data){
+      setfinaldata(data)
+      dispatch(addCourse(data))
+     }
+ }, [data])
+
+  useEffect(() => {
     
     if(isError){
      const errrorData = {
@@ -21,29 +38,32 @@ const Course = () => {
      dispatch(addError(errrorData))
    }
  }, [isError])
+
+
+ 
     
    if(!user.logedin){
     return  <Navigate to={'/login'} />
    }
   return (
     <>
-    {data ? 
+    {finaldata ? 
       <div>
-      {data.course.course_week.map(elem => (
+      {finaldata.course.course_week.map((elem,index) => (
         <div key={elem.id}>
       <h3 key={elem.id}  >{elem.name}</h3>
         {elem.course_unit.map(unit=>{
           
-            let [select_unit] = data.units.filter(item=>item.id == unit)
+            let [select_unit] = finaldata.units.filter(item=>item.id == unit)
             
-            return data.materials.map(unit=>{
+            return finaldata.materials.map(unit=>{
                 if(unit.id == select_unit.material.id){
                     if(unit.material_type === 'article')
                     {
-                        return<Link to={`/lesson/${unit.material_type}/${unit[unit.material_type].id}`} key={unit.id}>
+                        return<Link to={`/lesson/${index+1}/${unit.material_type}/${unit[unit.material_type].id}`} key={unit.id}>
                             {unit[unit.material_type].title}</Link>
                     }else{
-                        return<Link to={`/lesson/${unit.material_type}/${unit[unit.material_type].id}`} key={unit.id}>
+                        return<Link to={`/lesson/${index+1}/${unit.material_type}/${unit[unit.material_type].id}`} key={unit.id}>
                             {unit[unit.material_type].name}</Link>
                     }
                 }

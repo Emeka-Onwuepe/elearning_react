@@ -20,7 +20,7 @@ export const AppRoutes =createBrowserRouter (
         <Route path="register" element={<RegisterUser />} />
         <Route path="register/:schoolId" element={<RegisterStudent />} />
         <Route path="course/:id" element={<Course />} />
-        <Route path="lesson/:type/:id" element={<Lesson />} />
+        <Route path="lesson/:week/:type/:id" element={<Lesson />} />
       </Route>
   )
   );

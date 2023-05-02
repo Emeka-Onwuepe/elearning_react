@@ -105,7 +105,30 @@ export const elearningApi = createApi({
         url: `/api/getcourse?id=${data.id}`,
         headers: {"Authorization": `Token ${data.token}`}
       }),
-     
+      transformResponse : (response,meta,arg) =>{
+        const {course,units,materials} = response
+
+        const mapper = []
+
+        course.course_week.forEach((week,index)=>{
+          week.course_unit.forEach(id=>{
+            
+            let [select_unit]  = units.filter(item=>item.id == id)
+            materials.forEach(material=>{
+              if(material.id == select_unit.material.id){
+                const lesson_id = material[material.material_type].id
+                const type = material.material_type
+                mapper.push(`${index+1}-${lesson_id}-${type}`)
+                
+              }
+            })
+        
+          })
+        })
+
+        response.mapper = mapper
+        return response
+      }
     }), 
     
     getlesson : builder.query({

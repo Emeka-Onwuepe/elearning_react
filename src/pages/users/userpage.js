@@ -33,6 +33,7 @@ const UserPage = () => {
 //   dispatch(addError(errrorData))
 // }
 
+
 if(!user.logedin){
   return  <Navigate to={'/login'} />
  }

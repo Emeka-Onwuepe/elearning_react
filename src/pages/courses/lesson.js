@@ -1,34 +1,44 @@
-import { useParams } from "react-router-dom"
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { useGetlessonQuery } from "../../features/api/apiSlice"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { addError } from "../../features/error/errorSlice"
+import VideoLesson from "./videoLesson"
+import ArticleLesson from "./articleLesson"
+import Quiz from "./quiz"
+import { getLesson, getNextLesson } from "../../features/course/courseSlice"
 
 const Lesson = () => {
 
-  const{type, id} = useParams()
+  const{week,type, id} = useParams()
   const user = useSelector(state=>state.user)
-  const token  = user.usertoken
-  const {data,isError,error} = useGetlessonQuery({type, id,token})
-  const dispatch = useDispatch()
+  
+  const lesson = useSelector(state=>getLesson(state,type,id))
+  const nextLesson = useSelector(state=>getNextLesson(state,week,type,id))
+  const [nextWeek,nextId, nextType] = nextLesson
 
-
-  useEffect(() => {
-    
-    if(isError){
-     
-     const errorData = {
-       status_code: error.status,
-       message: error.data.detail
-     }
-     dispatch(addError(errorData))
-     console.log(errorData)
-   }
- }, [isError])
+const navigate = useNavigate()
+ if(!user.logedin | lesson == null ){
+  return  <Navigate to={'/login'} />
+ }
 
   return (
     <div>
-      <h1>Helo from type</h1>
+      {
+        type ==='video' && lesson ?<VideoLesson data={lesson}/>
+        : type=== 'article' && lesson ?<ArticleLesson data={lesson}/> 
+        : type=== 'quiz' && lesson ? <Quiz data={lesson}/>
+        : ''
+      }
+      <button onClick={()=>navigate(-1)}>Previous</button>
+      {
+
+        nextId?
+        <Link to={`/lesson/${nextWeek}/${nextType}/${nextId}`} >
+                          Next</Link>
+        : ''
+      }
+      
     </div>
   )
 }
