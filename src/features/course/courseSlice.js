@@ -6,7 +6,7 @@ const initialData = {
 		name: "",
 		course_week: [
 			{
-				id: 1,
+				id: 0,
 				name: "",
 				order: 0,
 				course_unit: []
@@ -71,6 +71,13 @@ export const courseSlice = createSlice({
         }
         localStorage.setItem("e_course", JSON.stringify(action.payload))
     },
+
+	resetCourse: (state)=>{
+		for (const key in initialData) {
+			state[key] = initialData[key]
+		 }
+		localStorage.setItem("e_course", JSON.stringify(initialData))
+	}
   },
  
 });
@@ -106,6 +113,6 @@ export const getNextLesson = (state,week,type,id)=>{
 }
 
 // export const getcourseToken = (state)=>state.token
-export const { addCourse} = courseSlice.actions;
+export const { addCourse,resetCourse} = courseSlice.actions;
 
 export default courseSlice.reducer;

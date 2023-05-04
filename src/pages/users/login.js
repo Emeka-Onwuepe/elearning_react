@@ -3,6 +3,7 @@ import { useLoginMutation } from "../../features/api/apiSlice"
 import { createUser } from "../../features/user/userslice"
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
+import { addError } from "../../features/error/errorSlice"
 
 const Login = () => {
   let location = window.location.origin
@@ -38,7 +39,18 @@ const  onSubmit = async (e)=>{
     dispatch(createUser({...res.data.user,'usertoken': res.data.token,logedin: true,})) 
     setuserlogged(true)
   }else{
-    console.log(res.error)
+    const errrorData = {
+      status_code: res.error.status,
+      message: ''
+    }
+    if(res.error.data.non_field_errors){
+      res.error.data.non_field_errors.forEach(message=>{
+        errrorData.message = message
+        dispatch(addError(errrorData))
+      })
+    }else{
+      console.log(res.error)
+    }
   }
 
 }

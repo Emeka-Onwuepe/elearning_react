@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Navigate } from 'react-router-dom';
 import { useRegisterUserMutation } from '../../features/api/apiSlice';
 import { createUser } from '../../features/user/userslice';
+import { addError } from '../../features/error/errorSlice';
 
 const RegisterUser = () => {
 
@@ -51,10 +52,27 @@ const onSubmit = async e => {
             dispatch(createUser({...res.data.user,'usertoken': res.data.token,logedin: true,})) 
             setuserlogged(true)
           }else{
-            console.log(res.error)
+            const errrorData = {
+                status_code: res.error.status,
+                message: ''
+              }
+            if(res.error.data.email){
+                res.error.data.email.forEach(message=>{
+                  errrorData.message = message
+                  dispatch(addError(errrorData))
+                })
+              }else{
+                console.log(res.error)
+              }
+          
           }
     } else if (password != confirm_password) {
-        console.log({ "passwordError": "passwords did not match" })
+        const errorData = {
+            status_code: 100,
+            message: "passwords did not match"
+          }
+          dispatch(addError(errorData))
+        
     }
     setErrorstate({ first_name: firstName, last_name: lastName, phone_number: phone, email: Email, phoneNumLength })
 }

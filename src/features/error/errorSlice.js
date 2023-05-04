@@ -14,6 +14,10 @@ export const errorSlice = createSlice({
         state.status_code = action.payload.status_code
         state.message = action.payload.message
     },
+    clearError :state=>{
+      state.status_code = 0
+      state.message = null
+    }
    
   },
  
@@ -21,6 +25,6 @@ export const errorSlice = createSlice({
 
 // export const getuser = (state)=>state
 // export const getuserToken = (state)=>state.token
-export const { addError} = errorSlice.actions;
+export const { addError,clearError} = errorSlice.actions;
 
 export default errorSlice.reducer;

@@ -2,22 +2,34 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, Navigate } from "react-router-dom"
 import { useGetCoursesQuery} from "../../features/api/apiSlice"
 import { addError } from "../../features/error/errorSlice"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 const UserPage = () => {
   const user = useSelector(state=>state.user)
   const dispatch = useDispatch()
   const {data,isLoading,isError,error} = useGetCoursesQuery(user.usertoken)
 
+  const [noClass, setnoClass] = useState(false)
+
 
   useEffect(() => {
     
      if(isError){
-      const errrorData = {
+      // const errrorData = {
+      //   status_code: error.status,
+      //   message: error.data.detail
+      // }
+      const errorData = {
         status_code: error.status,
         message: error.data.detail
       }
-      dispatch(addError(errrorData))
+      for (let key in error.data){
+       errorData.message = error.data[key]
+      }
+      if(error.status === 403){
+        setnoClass(true)
+      }
+      dispatch(addError(errorData))
     }
   }, [isError])
 
@@ -60,6 +72,7 @@ if(!user.logedin){
       )
       )}
       </div>
+    :noClass?<div><p>No content</p></div>
     :<h1>Loading</h1>}
    </>
   )

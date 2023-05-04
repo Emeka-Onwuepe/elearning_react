@@ -4,6 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { logoutUser } from '../features/user/userslice'
 import { useLogoutMutation } from '../features/api/apiSlice'
 import { addError } from '../features/error/errorSlice'
+import { resetCourse } from '../features/course/courseSlice'
 
 
 const Nav = () => {
@@ -29,6 +30,7 @@ const onClick = async (e)=>{
  
   if(data){
     dispatch(logoutUser()) 
+    dispatch(resetCourse())
   }
  
   

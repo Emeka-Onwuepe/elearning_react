@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { useGetlessonQuery } from "../../features/api/apiSlice"
 import { useDispatch, useSelector } from "react-redux"
@@ -8,6 +9,8 @@ import ArticleLesson from "./articleLesson"
 import Quiz from "./quiz"
 import { getLesson, getNextLesson } from "../../features/course/courseSlice"
 
+
+
 const Lesson = () => {
 
   const{week,type, id} = useParams()
@@ -17,13 +20,16 @@ const Lesson = () => {
   const nextLesson = useSelector(state=>getNextLesson(state,week,type,id))
   const [nextWeek,nextId, nextType] = nextLesson
 
+
 const navigate = useNavigate()
  if(!user.logedin | lesson == null ){
   return  <Navigate to={'/login'} />
  }
 
+
   return (
     <div>
+   
       {
         type ==='video' && lesson ?<VideoLesson data={lesson}/>
         : type=== 'article' && lesson ?<ArticleLesson data={lesson}/> 

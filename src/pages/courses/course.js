@@ -31,11 +31,14 @@ const Course = () => {
   useEffect(() => {
     
     if(isError){
-     const errrorData = {
+     const errorData = {
        status_code: error.status,
        message: error.data.detail
      }
-     dispatch(addError(errrorData))
+     for (let key in error.data){
+      errorData.message = error.data[key]
+     }
+     dispatch(addError(errorData))
    }
  }, [isError])
 

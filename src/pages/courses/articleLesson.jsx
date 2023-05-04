@@ -1,6 +1,6 @@
 
 const ArticleLesson = ({data}) => {
-  console.log(data)
+ 
    
 
   return (
