@@ -1,15 +1,20 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Link, Navigate } from "react-router-dom"
-import { useGetCoursesQuery} from "../../features/api/apiSlice"
+import { Link, Navigate, useNavigate } from "react-router-dom"
+import { useGetCoursesQuery, useSetUserMutation} from "../../features/api/apiSlice"
 import { addError } from "../../features/error/errorSlice"
 import { useEffect, useState } from "react"
+import { setPublicKeyAndCourses } from "../../features/course/courseSlice"
+import { createUser } from "../../features/user/userslice"
+import DisplayProducts from "../courses/displayProducts"
 
 const UserPage = () => {
   const user = useSelector(state=>state.user)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const {data,isLoading,isError,error} = useGetCoursesQuery(user.usertoken)
 
   const [noClass, setnoClass] = useState(false)
+  const [setUser] =useSetUserMutation()
 
 
   useEffect(() => {
@@ -21,8 +26,9 @@ const UserPage = () => {
       // }
       const errorData = {
         status_code: error.status,
-        message: error.data.detail
+        message: ''
       }
+
       for (let key in error.data){
        errorData.message = error.data[key]
       }
@@ -32,6 +38,40 @@ const UserPage = () => {
       dispatch(addError(errorData))
     }
   }, [isError])
+
+  useEffect(() => {
+    if(data){
+      if(data.public_key){
+
+        dispatch(setPublicKeyAndCourses({
+                                        key:data.public_key,
+                                        available_courses:data.available_courses}))
+      }
+      
+    }
+  }, [data])
+
+  const  setuser = async (e)=>{
+    e.preventDefault()
+   
+    let res = await setUser(user.usertoken)
+    if (res.data){
+      dispatch(createUser({...res.data.user,'usertoken': res.data.token,logedin: true,})) 
+      navigate(0)
+    }else{
+     
+      const errorData = {
+        status_code: res.error.status,
+        message: ''
+      }
+      for (const key in res.error.data) {
+        errorData.message = res.error.data[key]
+        dispatch(addError(errorData))
+      }
+    }
+  
+  }
+  
 
 //  if(!user.logedin){
 //   return  <Navigate to={'/login'} />
@@ -55,6 +95,7 @@ if(!user.logedin){
     <>
     {data ? 
       <div>
+      <div>
       {data.course_sets.map(elem => (
         <div key={elem.id}>
       <h3 key={elem.id}  >{elem.name}</h3>
@@ -72,7 +113,9 @@ if(!user.logedin){
       )
       )}
       </div>
-    :noClass?<div><p>No content</p></div>
+      <DisplayProducts products={data.available_courses} />
+      </div>
+    :noClass?<div><p>No content <button onClick={setuser}>Upgrade Account For Free</button> </p></div>
     :<h1>Loading</h1>}
    </>
   )

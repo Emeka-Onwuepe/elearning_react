@@ -42,7 +42,9 @@ const initialData = {
 		},
 		
 	],
-    mapper: []
+    mapper: [],
+	public_key: null,
+	available_course: []
 }
 
 
@@ -77,6 +79,16 @@ export const courseSlice = createSlice({
 			state[key] = initialData[key]
 		 }
 		localStorage.setItem("e_course", JSON.stringify(initialData))
+	},
+
+	setPublicKeyAndCourses: (state,action) =>{
+		
+		state.public_key = action.payload.key
+		state.available_courses = action.payload.available_courses
+		let data = JSON.parse(localStorage.getItem("e_course"))
+		data.public_key = action.payload.key
+		data.available_courses = action.payload.available_courses
+		localStorage.setItem("e_course", JSON.stringify(data))
 	}
   },
  
@@ -113,6 +125,6 @@ export const getNextLesson = (state,week,type,id)=>{
 }
 
 // export const getcourseToken = (state)=>state.token
-export const { addCourse,resetCourse} = courseSlice.actions;
+export const { addCourse,resetCourse, setPublicKeyAndCourses} = courseSlice.actions;
 
 export default courseSlice.reducer;

@@ -86,7 +86,7 @@ export const elearningApi = createApi({
       }),
       
       transformResponse : (response,meta,arg) =>{
-        const {course_sets,courses,uniques} = response
+        const {course_sets,courses,uniques,public_key,available_courses} = response
         course_sets.forEach(course_set=>{
           course_set.course_set_unit.forEach(elem=>{
             let [course] = courses.filter(x=>x.id === elem.course)
@@ -94,7 +94,7 @@ export const elearningApi = createApi({
             elem.weeks = course.course_week.length
           })
         })
-      return {course_sets,uniques}
+      return {course_sets,uniques,public_key,available_courses}
       }
       // transformErrorResponse : response => response.status,
       // invalidatesTags: ['userlogin']
@@ -139,6 +139,15 @@ export const elearningApi = createApi({
      
     }), 
 
+    setUser : builder.mutation({
+      query: token =>({
+        url: `/api/setuser`,
+        headers: {"Authorization": `Token ${token}`},
+        method:"POST",
+      }),
+
+    }),
+
     logout : builder.mutation({
       query: token =>({
         url: `/api/logout`,
@@ -155,5 +164,5 @@ export const elearningApi = createApi({
 export const {useLoginMutation,useRegisterUserMutation,
               useRegisterStudentMutation,useGetSchoolQuery,
               useGetCoursesQuery, useGetCourseQuery,useLogoutMutation,
-              useGetlessonQuery,
+              useGetlessonQuery, useSetUserMutation,
               } = elearningApi
