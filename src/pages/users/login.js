@@ -3,7 +3,7 @@ import { useLoginMutation } from "../../features/api/apiSlice"
 import { createUser } from "../../features/user/userslice"
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
-import { addError } from "../../features/error/errorSlice"
+import { addAlert } from "../../features/alert/alertSlice"
 
 const Login = () => {
   let location = window.location.origin
@@ -46,7 +46,7 @@ const  onSubmit = async (e)=>{
     if(res.error.data.non_field_errors){
       res.error.data.non_field_errors.forEach(message=>{
         errrorData.message = message
-        dispatch(addError(errrorData))
+        dispatch(addAlert(errrorData))
       })
     }else{
       console.log(res.error)

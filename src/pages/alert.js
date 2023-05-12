@@ -3,22 +3,28 @@ import { logoutUser } from "../features/user/userslice"
 import { useEffect } from "react"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-import { clearError } from "../features/error/errorSlice";
+import { clearAlert } from "../features/alert/alertSlice";
 
-const Error = () => {
+const Alert = () => {
     const dispatch = useDispatch()
-    const error = useSelector(state=>state.error)
+    const alert = useSelector(state=>state.alert)
     
 
     useEffect(() => {
-      if(error.status_code > 0){
-        if(error.status_code === 401){
+      if(alert.status_code > 0){
+        if(alert.status_code === 401){
           dispatch(logoutUser())
         }
+        if(alert.status_code === 200){
+          toast.success(alert.message)
+        }else{
+          toast.error(alert.message)
+        }
+       
+
+        dispatch(clearAlert())
       }
-      toast.error(error.message)
-      dispatch(clearError())
-    }, [error])
+    }, [alert])
   return (
     <>
             
@@ -38,4 +44,4 @@ const Error = () => {
   )
 }
 
-export default Error
+export default Alert

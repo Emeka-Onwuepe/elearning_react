@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
 import { logoutUser } from '../features/user/userslice'
 import { useLogoutMutation } from '../features/api/apiSlice'
-import { addError } from '../features/error/errorSlice'
 import { resetCourse } from '../features/course/courseSlice'
+import { addAlert } from '../features/alert/alertSlice'
 
 
 const Nav = () => {
@@ -20,7 +20,7 @@ useEffect(() => {
       status_code: error.status,
       message: error.data.detail
     }
-    dispatch(addError(errorData))
+    dispatch(addAlert(errorData))
   }
 }, [isError])
 

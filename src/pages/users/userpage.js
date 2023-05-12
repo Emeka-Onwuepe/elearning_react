@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { useGetCoursesQuery, useSetUserMutation} from "../../features/api/apiSlice"
-import { addError } from "../../features/error/errorSlice"
+import { addAlert} from "../../features/alert/alertSlice"
 import { useEffect, useState } from "react"
 import { setPublicKeyAndCourses } from "../../features/course/courseSlice"
 import { createUser } from "../../features/user/userslice"
@@ -35,7 +35,7 @@ const UserPage = () => {
       if(error.status === 403){
         setnoClass(true)
       }
-      dispatch(addError(errorData))
+      dispatch(addAlert(errorData))
     }
   }, [isError])
 
@@ -66,24 +66,11 @@ const UserPage = () => {
       }
       for (const key in res.error.data) {
         errorData.message = res.error.data[key]
-        dispatch(addError(errorData))
+        dispatch(addAlert(errorData))
       }
     }
   
   }
-  
-
-//  if(!user.logedin){
-//   return  <Navigate to={'/login'} />
-//  }
-
-//  if(isError){
-//   const errrorData = {
-//     status_code: error.status,
-//     message: error.data.detail
-//   }
-//   dispatch(addError(errrorData))
-// }
 
 
 if(!user.logedin){
@@ -112,6 +99,9 @@ if(!user.logedin){
 
       )
       )}
+      </div>
+      <div>
+        fjfjj
       </div>
       <DisplayProducts products={data.available_courses} />
       </div>

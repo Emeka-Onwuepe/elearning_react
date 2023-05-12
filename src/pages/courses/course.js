@@ -2,8 +2,8 @@ import { Link, Navigate, useParams } from "react-router-dom"
 import { useGetCourseQuery } from "../../features/api/apiSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { addError } from "../../features/error/errorSlice"
 import { addCourse } from "../../features/course/courseSlice"
+import { addAlert } from "../../features/alert/alertSlice"
 
 const Course = () => {
     const{id} = useParams()
@@ -38,7 +38,7 @@ const Course = () => {
      for (let key in error.data){
       errorData.message = error.data[key]
      }
-     dispatch(addError(errorData))
+     dispatch(addAlert(errorData))
    }
  }, [isError])
 

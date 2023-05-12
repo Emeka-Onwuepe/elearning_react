@@ -148,6 +148,26 @@ export const elearningApi = createApi({
 
     }),
 
+    processPurchase : builder.mutation({
+      query: data =>({
+        url: `/api/processpurchase`,
+        headers: {"Authorization": `Token ${data.token}`},
+        method:"POST",
+        body:data.data
+      }),
+
+    }),
+
+    getPurchases : builder.query({
+      query: token =>({
+        url: `/api/getpurchases`,
+        headers: {"Authorization": `Token ${token}`}
+      }),
+      
+      // transformErrorResponse : response => response.status,
+      // invalidatesTags: ['userlogin']
+    }), 
+
     logout : builder.mutation({
       query: token =>({
         url: `/api/logout`,
@@ -161,8 +181,11 @@ export const elearningApi = createApi({
 })
 
 
+
+
 export const {useLoginMutation,useRegisterUserMutation,
               useRegisterStudentMutation,useGetSchoolQuery,
               useGetCoursesQuery, useGetCourseQuery,useLogoutMutation,
               useGetlessonQuery, useSetUserMutation,
+              useProcessPurchaseMutation,useGetPurchasesQuery,
               } = elearningApi

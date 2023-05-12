@@ -3,7 +3,7 @@ import { Navigate, useParams } from 'react-router-dom'
 import { useRegisterUserMutation, useGetSchoolQuery } from '../../features/api/apiSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser } from '../../features/user/userslice'
-import { addError } from '../../features/error/errorSlice'
+import { addAlert } from '../../features/alert/alertSlice'
 
 const RegisterStudent = () => {
     const{schoolId} = useParams()
@@ -63,7 +63,7 @@ const RegisterStudent = () => {
                 if(res.error.data.email){
                     res.error.data.email.forEach(message=>{
                       errrorData.message = message
-                      dispatch(addError(errrorData))
+                      dispatch(addAlert(errrorData))
                     })
                   }else{
                     console.log(res.error)
@@ -74,7 +74,7 @@ const RegisterStudent = () => {
                 status_code: 100,
                 message: "passwords did not match"
               }
-              dispatch(addError(errorData))
+              dispatch(addAlert(errorData))
         }
         setErrorstate({ first_name: firstName, last_name: lastName, phone_number: phone, email: Email, phoneNumLength })
     }

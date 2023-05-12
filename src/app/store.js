@@ -3,15 +3,17 @@ import counterReducer from '../features/counter/counterSlice';
 import { elearningApi } from '../features/api/apiSlice';
 import userslice from '../features/user/userslice';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
-import errorSlice from '../features/error/errorSlice';
 import courseSlice from '../features/course/courseSlice';
+import cartSlice from '../features/cart/cartSlice';
+import alertSlice from '../features/alert/alertSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    cart: cartSlice,
     user: userslice,
     course: courseSlice,
-    error: errorSlice,
+    alert: alertSlice,
     [elearningApi.reducerPath] : elearningApi.reducer
   },
   middleware : getDefaultMiddleware =>

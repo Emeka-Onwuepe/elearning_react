@@ -44,7 +44,7 @@ const initialData = {
 	],
     mapper: [],
 	public_key: null,
-	available_course: []
+	available_courses: []
 }
 
 
@@ -58,7 +58,9 @@ const initialState = {
  course: courseData.course,
  units: courseData.units,
  materials: courseData.materials,
- mapper: courseData.mapper
+ mapper: courseData.mapper,
+ public_key: courseData.public_key,
+ available_courses: courseData.available_courses
 }
 
 
