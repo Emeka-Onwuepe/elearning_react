@@ -51,9 +51,9 @@ const Course = () => {
   return (
     <>
     {finaldata ? 
-      <div>
+      <div className="flex_container">
       {finaldata.course.course_week.map((elem,index) => (
-        <div key={elem.id}>
+        <div className="course_units" key={elem.id}>
       <h3 key={elem.id}  >{elem.name}</h3>
         {elem.course_unit.map(unit=>{
           

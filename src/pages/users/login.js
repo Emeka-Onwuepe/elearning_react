@@ -56,6 +56,7 @@ const  onSubmit = async (e)=>{
 }
 
   return (
+ 
  <fieldset>
  <form action="" method="post" onSubmit={onSubmit}>
      <label htmlFor="email">EMAIL</label>
@@ -64,8 +65,10 @@ const  onSubmit = async (e)=>{
      <input type="password" name="password" value={password} id="password" onChange={onChange} placeholder="Please Enter Your Password" />
      <button className='submitButton' type="submit">LOGIN</button>
  </form>
+ <div className="extraLogs">
  <p className="log"><Link to="/register">REGISTER</Link> </p>
  <p className='restPassword'><a target="blank" href={`${location}/password_reset`}>FORGOT PASSWORD</a></p>
+ </div>
 </fieldset>
   )
 }

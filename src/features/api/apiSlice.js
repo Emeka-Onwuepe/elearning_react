@@ -92,6 +92,7 @@ export const elearningApi = createApi({
             let [course] = courses.filter(x=>x.id === elem.course)
             elem.name = course.name
             elem.weeks = course.course_week.length
+            elem.display_image = course.display_image
           })
         })
       return {course_sets,uniques,public_key,available_courses}

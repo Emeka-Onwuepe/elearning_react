@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { setPublicKeyAndCourses } from "../../features/course/courseSlice"
 import { createUser } from "../../features/user/userslice"
 import DisplayProducts from "../courses/displayProducts"
+import '../../css/course_display.css'
 
 const UserPage = () => {
   const user = useSelector(state=>state.user)
@@ -82,27 +83,46 @@ if(!user.logedin){
     <>
     {data ? 
       <div>
-      <div>
-      {data.course_sets.map(elem => (
-        <div key={elem.id}>
-      <h3 key={elem.id}  >{elem.name}</h3>
+        <div className="flex_container purchased">
+
+      <div className="course_sets">
       
+      {data.course_sets.map(elem => (
+        <div className="course_set" key={elem.id}>
+          
+      <h5 key={elem.id} className="course_set_name"  >{elem.name}</h5>
+        <div className="flex_container_inner">
         {elem.course_set_unit.map(item=>(
-          <div id={item.id} key={item.id}>
+          <div className="flex_item" id={item.id} key={item.id}>
+           <img src={item.display_image} alt="img"  />
           <p key={item.id + 'name'}>{item.name}</p>
-          <p key={item.weeks}>{item.weeks}</p>
+          <p key={item.weeks}> Duration: {`${item.weeks} 
+              ${item.weeks>1?'weeks':'week'}`}</p>
           <Link key={item.id + 'link'}  to={`/course/${item.id}`} >Open</Link>
           </div>
         ))}
-      
+      </div>
       </div>
 
       )
       )}
-      </div>
-      <div>
-        fjfjj
-      </div>
+   </div>
+  
+      {data.uniques?
+      <div className="flex_container">
+        {data.uniques.map(item=>(
+          <div className="flex_item" id={item.id} key={item.id}>
+           <img src={item.display_image} alt="img"  />
+          <p key={item.id + 'name'}>{item.name}</p>
+          <p key={item.course_week.length}> Duration: {`${item.course_week.length} 
+              ${item.course_week.length>1?'weeks':'week'}`}</p>
+          <Link key={item.id + 'link'}  to={`/course/${item.id}`} >Open</Link>
+          </div>
+        ))}
+      </div> 
+      :""}
+     </div>
+       
       <DisplayProducts products={data.available_courses} />
       </div>
     :noClass?<div><p>No content <button onClick={setuser}>Upgrade Account For Free</button> </p></div>

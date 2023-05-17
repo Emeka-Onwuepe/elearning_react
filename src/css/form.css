@@ -1,0 +1,66 @@
+/* 
+
+select {
+    border: 0px;
+    width: 280px;
+    height: 30px;
+}
+
+input,
+label,
+textarea,
+select {
+    display: block;
+}
+
+textarea {
+    height: 80px;
+}
+
+*/
+
+input,
+textarea,
+select ,
+.submitButton{
+    margin-bottom: 10px;
+} 
+
+.formDiv{
+    
+}
+
+input,
+textarea {
+    height: 30px;
+    padding: 10px;
+}
+
+fieldset{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    height: 75vh;
+    border: 0px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+    width: 500px;
+}
+
+.extraLogs{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 500px;
+}
+
+
+
+/* .submitButton{
+
+} */

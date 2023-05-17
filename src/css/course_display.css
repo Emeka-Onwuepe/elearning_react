@@ -1,0 +1,101 @@
+.flex_container,
+.flex_container_inner{
+    margin-top: 10px; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-bottom: 10;
+    
+}
+
+.flex_container_inner{
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+
+.course_sets{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+.course_set_name,
+.category_name{
+    text-align: center;
+}
+.course_set{
+  
+}
+
+
+.flex_item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 320px;
+    margin: 5px;
+    align-items: center;
+    background-color: white;
+    
+   
+}
+
+.flex_item img{
+    width: 300px;
+    height: auto;
+
+}
+
+.flex_item p{
+    margin-bottom: 5px;
+}
+
+.products{
+    margin-top: 10px; 
+/*   
+    background-color: #81D9DB; */
+     background-color: #9BDAF2;
+    padding: 10px;
+    
+}
+
+.purchased{
+    /* background-color: #65d0fa; */
+}
+
+.category{
+    
+    padding: 10px;
+   
+    
+}
+
+.product_category{
+    /* border: 2px solid white; */
+    padding-top: 5px;
+    background-color: #81D9DB; 
+}
+
+.course_units a {
+display: block;
+margin-bottom: 10px;
+}
+
+.course_set_item{
+    background-color: #9BDAF2;
+    border: 2px solid white;
+}
+
+.popup{
+    position: fixed;
+    top:100px;
+    left: auto;
+    background-color: #203B8C;
+    padding: 40px 10px 10px 10px;
+}
+
+.close_set{
+    position: fixed;
+    top: 115px;
+}
