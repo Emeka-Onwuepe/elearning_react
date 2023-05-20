@@ -59,6 +59,14 @@ form {
     width: 500px;
 }
 
+#searchTitle{
+    display: block;
+}
+
+input[type = checkbox]{
+    height: unset;
+    margin: 5px 5px 5px 2px;
+}
 
 
 /* .submitButton{

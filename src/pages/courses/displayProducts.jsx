@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector} from 'react-redux'
 import { addComas, addTOCartFun} from '../../features/cart/cartSlice'
 import { addAlert } from '../../features/alert/alertSlice'
+import { Link } from 'react-router-dom'
 
 const DisplayProducts = ({products}) => {
     
@@ -57,7 +58,8 @@ const DisplayProducts = ({products}) => {
       {products.map((cat,c_index)=>(
 
         <div  className='product_category' key={`${c_index}div`}>
-        <h2 className='category_name' key={c_index}>{cat.category}</h2>
+        <h2 className='category_name' key={c_index}>
+          <Link to={`/category/${cat.category_id}/${cat.category}`}>{cat.category}</Link></h2>
         <div className='category flex_container'>
 
         <div className=''>

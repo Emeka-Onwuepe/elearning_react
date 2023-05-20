@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { filterList } from '../helperfuncs'
 
 // Define a service using a base URL and expected endpoints
 const baseUrl = 'http://127.0.0.1:8000'
@@ -86,7 +85,8 @@ export const elearningApi = createApi({
       }),
       
       transformResponse : (response,meta,arg) =>{
-        const {course_sets,courses,uniques,public_key,available_courses} = response
+        const {course_sets,courses,uniques,
+            public_key,available_courses} = response
         course_sets.forEach(course_set=>{
           course_set.course_set_unit.forEach(elem=>{
             let [course] = courses.filter(x=>x.id === elem.course)
@@ -95,8 +95,9 @@ export const elearningApi = createApi({
             elem.display_image = course.display_image
           })
         })
-      return {course_sets,uniques,public_key,available_courses}
-      }
+      return {course_sets,uniques,
+              public_key,available_courses}
+          }
       // transformErrorResponse : response => response.status,
       // invalidatesTags: ['userlogin']
     }),  
@@ -169,6 +170,16 @@ export const elearningApi = createApi({
       // invalidatesTags: ['userlogin']
     }), 
 
+    getcategory: builder.query({
+      query: data =>({
+        url: `/api/getcategory?id=${data.id}&name=${data.name}`,
+        headers: {"Authorization": `Token ${data.token}`}
+      }),
+      
+      // transformErrorResponse : response => response.status,
+      // invalidatesTags: ['userlogin']
+    }), 
+
     logout : builder.mutation({
       query: token =>({
         url: `/api/logout`,
@@ -183,10 +194,10 @@ export const elearningApi = createApi({
 
 
 
-
 export const {useLoginMutation,useRegisterUserMutation,
               useRegisterStudentMutation,useGetSchoolQuery,
               useGetCoursesQuery, useGetCourseQuery,useLogoutMutation,
               useGetlessonQuery, useSetUserMutation,
               useProcessPurchaseMutation,useGetPurchasesQuery,
+              useGetcategoryQuery,
               } = elearningApi

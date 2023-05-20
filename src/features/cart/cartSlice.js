@@ -41,13 +41,22 @@ export const cartSlice = createSlice({
         data.total = state.total
         localStorage.setItem("e_cart", JSON.stringify(data)) 
    }
+   ,
+   clearCart: (state)=>{
+    state.products = []
+    state.total = 0
+    let data = JSON.parse(localStorage.getItem("e_cart"))
+    data.products = []
+    data.total = 0
+    localStorage.setItem("e_cart", JSON.stringify(data)) 
+}
   },
  
 });
 
 // export const getcart = (state)=>state
 // export const getcartToken = (state)=>state.token
-export const { addToCart,updateCart} = cartSlice.actions;
+export const { addToCart,updateCart,clearCart} = cartSlice.actions;
 
 export const addTOCartFun = (dispatch,cartItem,cartState,addtoCart=addToCart)=>{
     let add = true

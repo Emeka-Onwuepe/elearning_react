@@ -17,6 +17,8 @@ footer {
 a {
   text-decoration: none;
   display: inline-block;
+  /* color: white; */
+  color: white;
 }
 
 body {
@@ -82,7 +84,7 @@ nav{
   height: 100px;
 }
 main{
-  padding: 0px 10px;
+  padding: 10px;
   min-height:100vh; 
   min-height: calc(100vh - 175px); 
   
@@ -94,6 +96,10 @@ button{
   background-color: #2e61f8;
   color: white;
   border: 0px;
+}
+
+.removeItem{
+  background-color: #7895ec;
 }
 
 footer{

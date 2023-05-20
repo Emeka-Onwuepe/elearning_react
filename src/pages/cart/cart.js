@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { addComas, updateCart } from "../../features/cart/cartSlice"
+import { addComas, clearCart, updateCart } from "../../features/cart/cartSlice"
 import { useProcessPurchaseMutation } from "../../features/api/apiSlice"
 import { useEffect, useState } from "react"
 import { addAlert } from "../../features/alert/alertSlice"
@@ -18,11 +18,12 @@ const Cart = () => {
     const year = day.getFullYear()
     const random = Math.floor(Math.random() * 100)
     const purchase_id = `DL${year}${random}${date}`
-    console.log('ran',purchase_id)
+
 
     const dispatch = useDispatch()
     const [processPurchase,{isLoading,isError,data,error}]= useProcessPurchaseMutation()
 
+    const [sucess, setsucess] = useState(false)
 
     useEffect(() => {
     
@@ -56,15 +57,21 @@ const Cart = () => {
     const onSuccess = (reference) => {
         const data = {purchase_id:reference.reference,action:'confirm'}
         const res = processPurchase({data,token:user.usertoken})
-        res.unwrap().then(res=>console.log(res))
-        .catch(err=>console.log(err))
-      // Implementation for whatever you want to do with reference and after success call.
-     
+        res.unwrap().then(res=>{
+          dispatch(clearCart())
+          dispatch(addAlert({
+            status_code: 200,
+            message: 'Purchased Successfully'
+          }))
+
+            setsucess(true)
+
+      })
+        .catch(err=>{console.log(err)})
     };
   
-    // you can call this function anything
     const onClose = () => {
-      // implementation for  whatever you want to do when the Paystack dialog closed.
+     
       console.log('closed')
     }
 
@@ -107,20 +114,32 @@ const Cart = () => {
     if(!user.logedin){
         return  <Navigate to={'/login'} />
        }
-
+      
+     if(sucess){
+        return  <Navigate to={'/userpage'} />
+       }
   return (
     <div>
-        <p>{addComas(cart.total)}</p>
-        <button onClick={checkOut}>Checkout</button>
-       {cart.products.map((item,index)=>(
-            <div key={index}>
+      <div className="flex_container">
+      <p className="flex_item">Total: {addComas(cart.total)}</p>
+      <div className="flex_item remove_bg">
+      <button  onClick={checkOut}>Checkout</button>
+      </div>
+        
+      </div>
+       
+        <div className="flex_container">
+        {cart.products.map((item,index)=>(
+            <div className="flex_item" key={index}>
                 <p>{item.name}</p>
                 <p>{addComas(item.price)}</p>
                 <p>{item.type}</p>
-                <button id={`${item.category_id}-${item.type}-${item.id}`} 
+                <button className="removeItem" id={`${item.category_id}-${item.type}-${item.id}`} 
                 onClick={removeItem}>Remove Item</button>
             </div>
         ))}
+        </div>
+     
     </div>
   )
 }

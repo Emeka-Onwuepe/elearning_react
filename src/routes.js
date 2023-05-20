@@ -11,6 +11,7 @@ import Course from "./pages/courses/course";
 import Lesson from "./pages/courses/lesson";
 import Cart from "./pages/cart/cart";
 import PurchaseHistory from "./pages/cart/purchaseHistory";
+import Category from "./pages/courses/category";
 
 
 export const AppRoutes =createBrowserRouter (
@@ -24,6 +25,7 @@ export const AppRoutes =createBrowserRouter (
         <Route path="register" element={<RegisterUser />} />
         <Route path="register/:schoolId" element={<RegisterStudent />} />
         <Route path="course/:id" element={<Course />} />
+        <Route path="category/:id/:category" element={<Category />} />
         <Route path="lesson/:week/:type/:id" element={<Lesson />} />
       </Route>
   )
