@@ -21,6 +21,14 @@ a {
   color: white;
 }
 
+.no_padding{
+  padding: 0px;
+}
+
+.no_margin{
+  margin: 0px;
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -29,7 +37,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #E6E6E6;
+  /* background-color: #E6E6E6; */
+  background-color: #10a5df3d;
  
 }
 
@@ -99,7 +108,14 @@ button{
 }
 
 .removeItem{
+  background-color: #e64a4abd;
+}
+
+.purchaseHistory{
   background-color: #7895ec;
+  margin: 10px auto;
+  display: flex;
+
 }
 
 footer{

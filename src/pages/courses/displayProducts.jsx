@@ -27,7 +27,7 @@ const DisplayProducts = ({products}) => {
     const addtoCart = (e)=>{
         let [category,type,index] = e.target.id.split('-')
         let product = products[category][type][index]
-        let productType =  type ==='singles' ? "course" :type
+        let productType =  type ==='courses' ? "course" :'course set'
         let cartItem = {
             id: product.id,
             name: product.name,
@@ -68,7 +68,7 @@ const DisplayProducts = ({products}) => {
                <img src={single.display_image} alt="img"  />
                 <p>{single.name}</p>
                 <p>{addComas(single.price)}</p>
-                <p>course</p>
+                <p className='course-type'>course</p>
                 <button id={`${c_index}-singles-${index}`} 
                  onClick={addtoCart}>Add to cart</button>
             </div>
@@ -82,8 +82,13 @@ const DisplayProducts = ({products}) => {
               <img src={course_set.display_image} alt="img"  />
                 <p>{course_set.name}</p>
                 <p>{addComas(course_set.price)}</p>
-                <p>course_set</p>
-                <button key='button' onClick={displayCourses} id={`${c_index}-${index}`}>View courses</button>
+              
+                <div className="flex_container_inner no_margin">
+                <p className='course-type'>course_set</p>
+                <button className="viewCourses" key='button' onClick={displayCourses} id={`${c_index}-${index}`}>View courses</button>
+              
+                </div>
+
                 <button id={`${c_index}-course_sets-${index}`} 
                 onClick={addtoCart}>Add to cart</button>
             </div>
@@ -99,7 +104,7 @@ const DisplayProducts = ({products}) => {
 
     {selected && display?
     <div className='flex_container popup'>
-       <button onClick={closeCourse} className='close_set'>close</button>
+       <button onClick={closeCourse} className='close_set'>Close</button>
     {selected.map((item,index)=>(
     
          <div className='flex_item' key={index}>

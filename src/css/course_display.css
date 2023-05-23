@@ -14,6 +14,7 @@
 }
 
 
+
 .course_sets{
     display: flex;
     flex-wrap: wrap;
@@ -28,6 +29,25 @@
   
 }
 
+.course-type{
+    /* padding: 8px; */
+}
+
+.viewCourses {
+	background-color: #10a5df3d;
+	color: unset;
+	margin: 0px 0px 5px 30px;
+	 padding: 4px 8px; 
+}
+
+.open_course{
+    background-color: #10a5dfcc;
+    color: unset;
+    padding: 8px;
+    color: white;
+    border-radius: 15px;
+
+}
 
 .flex_item {
     display: flex;
@@ -51,7 +71,7 @@
 }
 
 .flex_item p{
-    margin-bottom: 5px;
+    padding: 5px;
 }
 
 .products{

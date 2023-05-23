@@ -6,12 +6,12 @@ const baseUrl = 'http://127.0.0.1:8000'
 export const elearningApi = createApi({
   reducerPath: 'elearningApi',
   baseQuery: fetchBaseQuery({ baseUrl,
-    prepareHeaders(headers,{getState}){
+    prepareHeaders(headers){
         headers.set("Content-Type", "application/json")
         return headers
     }
     }),
-  tagTypes: ['userlogin'],
+  tagTypes: ['userlogin','DeletePurchase'],
   endpoints: (builder) => ({
 
     login: builder.mutation({
@@ -155,20 +155,40 @@ export const elearningApi = createApi({
         url: `/api/processpurchase`,
         headers: {"Authorization": `Token ${data.token}`},
         method:"POST",
-        body:data.data
+        body:data.data,
       }),
-
+      // invalidatesTags: ['DeletePurchase']
+      // invalidatesTags: ['deletePurchase']
     }),
 
     getPurchases : builder.query({
       query: token =>({
         url: `/api/getpurchases`,
+        // providesTags: ['DeletePurchase'],
         headers: {"Authorization": `Token ${token}`}
+        
       }),
       
       // transformErrorResponse : response => response.status,
       // invalidatesTags: ['userlogin']
+      // invalidatesTags: ['deletePurchase']
+      
     }), 
+
+    deletePurchase : builder.mutation({
+      query: data =>({
+        url: "/api/deletepurchase",
+        headers: {"Authorization": `Token ${data.token}`},
+        method:"POST",
+        body: data.id,
+        //  provideTag: ['deletepurchase']
+        // providesTags: ['deletePurchase']
+      }),
+      // transformResponse : (response,meta,arg) => response.data,
+      // transformErrorResponse : response => response.status,
+      // invalidatesTags: ['deletepurchase']
+      // invalidatesTags: ['DeletePurchase']
+    }),
 
     getcategory: builder.query({
       query: data =>({
@@ -199,5 +219,5 @@ export const {useLoginMutation,useRegisterUserMutation,
               useGetCoursesQuery, useGetCourseQuery,useLogoutMutation,
               useGetlessonQuery, useSetUserMutation,
               useProcessPurchaseMutation,useGetPurchasesQuery,
-              useGetcategoryQuery,
+              useGetcategoryQuery, useDeletePurchaseMutation,
               } = elearningApi

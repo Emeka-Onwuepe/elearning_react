@@ -3,7 +3,7 @@ import { addComas, clearCart, updateCart } from "../../features/cart/cartSlice"
 import { useProcessPurchaseMutation } from "../../features/api/apiSlice"
 import { useEffect, useState } from "react"
 import { addAlert } from "../../features/alert/alertSlice"
-import { Navigate } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import { usePaystackPayment } from "react-paystack"
 
 const Cart = () => {
@@ -51,6 +51,8 @@ const Cart = () => {
         publicKey: public_key,
         currency: 'NGN',
     };
+
+ 
     const initializePayment = usePaystackPayment(config)
     
     // you can call this function anything
@@ -71,7 +73,6 @@ const Cart = () => {
     };
   
     const onClose = () => {
-     
       console.log('closed')
     }
 
@@ -104,11 +105,20 @@ const Cart = () => {
        
         
         const data = {purchase_id,total,items,action:'create'}
-        const res = await processPurchase({data,token:user.usertoken})
-    if(res.data.created){
-         initializePayment(onSuccess, onClose)
-    }
+        let res = {data :{created:false}}
 
+        if (navigator.onLine){
+        res = await processPurchase({data,token:user.usertoken})
+      }else{
+        dispatch(addAlert({
+          status_code: 100,
+          message: "You are offline"
+        }))
+      }
+    if (res.data.created){
+        initializePayment(onSuccess, onClose)
+        
+    }
     }
 
     if(!user.logedin){
@@ -121,16 +131,22 @@ const Cart = () => {
   return (
     <div>
       <div className="flex_container">
-      <p className="flex_item">Total: {addComas(cart.total)}</p>
-      <div className="flex_item remove_bg">
+      <p className="flex_item">Total: <span>&#8358;</span> {addComas(cart.total)}</p>
+
+      <div className="flex_item remove_bg ">
+     
       <button  onClick={checkOut}>Checkout</button>
       </div>
+      {/* <div className="remove_bg">
+     
+      </div> */}
         
       </div>
        
         <div className="flex_container">
         {cart.products.map((item,index)=>(
             <div className="flex_item" key={index}>
+              <img src={item.image} alt="img"  />
                 <p>{item.name}</p>
                 <p>{addComas(item.price)}</p>
                 <p>{item.type}</p>
@@ -139,6 +155,9 @@ const Cart = () => {
             </div>
         ))}
         </div>
+        <button className="purchaseHistory center">
+        <Link to={'/purchasehistory'}>View Purchase History</Link>
+      </button>
      
     </div>
   )

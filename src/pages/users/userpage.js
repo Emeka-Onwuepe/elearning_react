@@ -98,7 +98,7 @@ if(!user.logedin){
           <p key={item.id + 'name'}>{item.name}</p>
           <p key={item.weeks}> Duration: {`${item.weeks} 
               ${item.weeks>1?'weeks':'week'}`}</p>
-          <Link key={item.id + 'link'}  to={`/course/${item.id}`} >Open</Link>
+          <Link className="open_course" key={item.id + 'link'}  to={`/course/${item.id}`} >Open</Link>
           </div>
         ))}
       </div>
@@ -116,7 +116,7 @@ if(!user.logedin){
           <p key={item.id + 'name'}>{item.name}</p>
           <p key={item.course_week.length}> Duration: {`${item.course_week.length} 
               ${item.course_week.length>1?'weeks':'week'}`}</p>
-          <Link key={item.id + 'link'}  to={`/course/${item.id}`} >Open</Link>
+          <Link className="open_course" key={item.id + 'link'}  to={`/course/${item.id}`} >Open</Link>
           </div>
         ))}
       </div> 

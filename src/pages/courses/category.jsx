@@ -173,9 +173,14 @@ const Category = () => {
             <div className='flex_item course_set_item' key={index}>
               <img src={course_set.display_image} alt="img"  />
                 <p>{course_set.name}</p>
+                
                 <p>{addComas(course_set.price)}</p>
-                <p>course_set</p>
-                <button key='button' onClick={displayCourses} id={index}>View courses</button>
+
+                <div className="flex_container_inner no_margin">
+                <p className='course-type'>course_set</p>
+                <button className="viewCourses" key='button' onClick={displayCourses} id={index}>View courses</button>
+                </div>
+
                 <button id={`course_sets-${index}`} 
                 onClick={addtoCart}>Add to cart</button>
             </div>
@@ -191,7 +196,7 @@ const Category = () => {
 
     {selected && display?
     <div className='flex_container popup'>
-       <button onClick={closeCourse} className='close_set'>close</button>
+       <button onClick={closeCourse} className='close_set'>Close</button>
     {selected.map((item,index)=>(
     
          <div className='flex_item' key={index}>

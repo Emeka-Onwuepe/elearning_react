@@ -49,7 +49,6 @@ export const userSlice = createSlice({
       for (const key in state) {
         state[key] = initialData[key]
      }
-     console.log(state.usertoken)
      localStorage.setItem("e_user", JSON.stringify(initialData))
     }
   },
