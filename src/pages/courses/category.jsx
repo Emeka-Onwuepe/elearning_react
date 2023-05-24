@@ -195,6 +195,8 @@ const Category = () => {
     :""}
 
     {selected && display?
+    <div className="pop_container">  
+
     <div className='flex_container popup'>
        <button onClick={closeCourse} className='close_set'>Close</button>
     {selected.map((item,index)=>(
@@ -208,6 +210,7 @@ const Category = () => {
          </div>
          
      ))}
+    </div>
     </div>
     :""}
     

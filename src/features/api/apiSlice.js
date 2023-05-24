@@ -11,7 +11,7 @@ export const elearningApi = createApi({
         return headers
     }
     }),
-  tagTypes: ['userlogin','DeletePurchase'],
+  tagTypes: ['userlogin','getCourses','getPurchases'],
   endpoints: (builder) => ({
 
     login: builder.mutation({
@@ -81,9 +81,9 @@ export const elearningApi = createApi({
     getCourses : builder.query({
       query: token =>({
         url: `/api/getcourses`,
-        headers: {"Authorization": `Token ${token}`}
+        headers: {"Authorization": `Token ${token}`},
       }),
-      
+      providesTags: ['getCourses'],
       transformResponse : (response,meta,arg) =>{
         const {course_sets,courses,uniques,
             public_key,available_courses} = response
@@ -157,18 +157,17 @@ export const elearningApi = createApi({
         method:"POST",
         body:data.data,
       }),
-      // invalidatesTags: ['DeletePurchase']
+      invalidatesTags: ['getCourses','getPurchases']
       // invalidatesTags: ['deletePurchase']
     }),
 
     getPurchases : builder.query({
       query: token =>({
         url: `/api/getpurchases`,
-        // providesTags: ['DeletePurchase'],
         headers: {"Authorization": `Token ${token}`}
         
       }),
-      
+      providesTags:['getPurchases']
       // transformErrorResponse : response => response.status,
       // invalidatesTags: ['userlogin']
       // invalidatesTags: ['deletePurchase']
@@ -186,7 +185,7 @@ export const elearningApi = createApi({
       }),
       // transformResponse : (response,meta,arg) => response.data,
       // transformErrorResponse : response => response.status,
-      // invalidatesTags: ['deletepurchase']
+      invalidatesTags: ['getPurchases']
       // invalidatesTags: ['DeletePurchase']
     }),
 

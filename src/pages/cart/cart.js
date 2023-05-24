@@ -101,9 +101,12 @@ const Cart = () => {
     const checkOut = async ()=>{
       
         const total = cart.total
-        const items = cart.products
+        const items = cart.products.map(item=>({
+                                                id:item.id,
+                                                type:item.type
+                                              }))
        
-        
+        console.log(items)
         const data = {purchase_id,total,items,action:'create'}
         let res = {data :{created:false}}
 
@@ -130,7 +133,8 @@ const Cart = () => {
        }
   return (
     <div>
-      <div className="flex_container">
+     {cart.total? 
+     <div className="flex_container">
       <p className="flex_item">Total: <span>&#8358;</span> {addComas(cart.total)}</p>
 
       <div className="flex_item remove_bg ">
@@ -142,6 +146,7 @@ const Cart = () => {
       </div> */}
         
       </div>
+      :""}
        
         <div className="flex_container">
         {cart.products.map((item,index)=>(

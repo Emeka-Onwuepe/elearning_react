@@ -5,6 +5,7 @@ import { addAlert } from '../../features/alert/alertSlice'
 import { Link } from 'react-router-dom'
 
 const DisplayProducts = ({products}) => {
+
     
     const dispatch = useDispatch()
     const cartState = useSelector(state=>state.cart.products)
@@ -27,7 +28,7 @@ const DisplayProducts = ({products}) => {
     const addtoCart = (e)=>{
         let [category,type,index] = e.target.id.split('-')
         let product = products[category][type][index]
-        let productType =  type ==='courses' ? "course" :'course set'
+        let productType =  type ==='singles' ? "course" :'course set'
         let cartItem = {
             id: product.id,
             name: product.name,
@@ -103,6 +104,9 @@ const DisplayProducts = ({products}) => {
     </div>
 
     {selected && display?
+    <div className="pop_container">
+
+ 
     <div className='flex_container popup'>
        <button onClick={closeCourse} className='close_set'>Close</button>
     {selected.map((item,index)=>(
@@ -116,6 +120,8 @@ const DisplayProducts = ({products}) => {
          </div>
          
      ))}
+    </div>
+
     </div>
     :""}
 

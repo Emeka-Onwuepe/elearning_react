@@ -25,8 +25,12 @@
 .category_name{
     text-align: center;
 }
-.course_set{
-  
+
+
+.course_set {
+	margin-right: 10px;
+	padding: 5px;
+    background-color: #10a5df3d;
 }
 
 .course-type{
@@ -43,9 +47,9 @@
 .open_course{
     background-color: #10a5dfcc;
     color: unset;
-    padding: 8px;
+    padding: 5px;
     color: white;
-    border-radius: 15px;
+    border-radius: 10px;
 
 }
 
@@ -112,19 +116,34 @@ margin-bottom: 10px;
 }
 
 .popup{
-    position: fixed;
-    top:100px;
-    left: auto;
-    background-color: #203B8C;
+    margin: 0px;
+    background-color: #14bdfff7;
     padding: 40px 10px 10px 10px;
+}
+
+.pop_container {
+	width: calc(100% - 20px);
+	box-sizing: border-box;
+	position: fixed;
+	top: 120px;
+	max-width: 1480px;
 }
 
 .close_set{
     position: fixed;
-    top: 115px;
+    top: 135px;
 }
 
 .filterDiv{
     background-color: #10a5df3d;
     padding-top: 10px;
+    margin-top: 10px;
+}
+
+#purchase_history p{
+    padding: 2px;
+}
+
+#purchase_history span{
+    color: #137399;
 }

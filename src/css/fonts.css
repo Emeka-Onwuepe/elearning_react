@@ -20,7 +20,7 @@ h1{
     font-weight: bold;
 }
 
-button{
+button,.open_course{
     font-size: 14px;
 }
 
@@ -43,7 +43,7 @@ h4 {
         font-size: 18px;
     }
 
-    button{
+    button,.open_course{
         font-size: 15px;
     }
 
