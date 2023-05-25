@@ -3,6 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialData = {
     products:[],
     total: 0,
+    payment:{
+        status: null,
+        purchase_id: "",
+        id:null,
+    }
 }
 
 
@@ -16,7 +21,7 @@ if(!cartData){
 const initialState = {
   products: cartData.products, 
   total:cartData.total,
-  
+  payment: cartData.payment
 }
 
 
@@ -40,7 +45,13 @@ export const cartSlice = createSlice({
         data.products = state.products
         data.total = state.total
         localStorage.setItem("e_cart", JSON.stringify(data)) 
-   }
+   },
+   updatePayment: (state,action)=>{
+    state.payment = action.payload
+    let data = JSON.parse(localStorage.getItem("e_cart"))
+    data.payment = state.payment
+    localStorage.setItem("e_cart", JSON.stringify(data)) 
+    }
    ,
    clearCart: (state)=>{
     state.products = []
@@ -56,7 +67,7 @@ export const cartSlice = createSlice({
 
 // export const getcart = (state)=>state
 // export const getcartToken = (state)=>state.token
-export const { addToCart,updateCart,clearCart} = cartSlice.actions;
+export const { addToCart,updateCart,updatePayment,clearCart} = cartSlice.actions;
 
 export const addTOCartFun = (dispatch,cartItem,cartState,addtoCart=addToCart)=>{
     let add = true

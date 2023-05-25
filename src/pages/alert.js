@@ -21,7 +21,7 @@ const Alert = () => {
           toast.error(alert.message)
         }
        
-
+        
         dispatch(clearAlert())
       }
     }, [alert])

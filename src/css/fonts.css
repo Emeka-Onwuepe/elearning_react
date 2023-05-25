@@ -20,7 +20,9 @@ h1{
     font-weight: bold;
 }
 
-button,.open_course{
+button,.open_course,
+.Toastify__toast-body div,
+.lesser {
     font-size: 14px;
 }
 
@@ -43,7 +45,9 @@ h4 {
         font-size: 18px;
     }
 
-    button,.open_course{
+    button,.open_course,
+    .Toastify__toast-body div,
+    .lesser{
         font-size: 15px;
     }
 

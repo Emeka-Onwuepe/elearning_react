@@ -54,20 +54,20 @@ const Course = () => {
       <div className="flex_container">
       {finaldata.course.course_week.map((elem,index) => (
         <div className="course_units" key={elem.id}>
-      <h3 key={elem.id}  >{elem.name}</h3>
-        {elem.course_unit.map(unit=>{
+      <h3 key={elem.id}  >{elem.name} <span className="lesser">{`(week ${index+1})`}</span></h3>
+        {elem.course_unit.map((unit,unit_index)=>{
           
             let [select_unit] = finaldata.units.filter(item=>item.id == unit)
             
-            return finaldata.materials.map(unit=>{
+            return finaldata.materials.map((unit)=>{
                 if(unit.id == select_unit.material.id){
                     if(unit.material_type === 'article')
                     {
                         return<Link to={`/lesson/${index+1}/${unit.material_type}/${unit[unit.material_type].id}`} key={unit.id}>
-                            {unit[unit.material_type].title}</Link>
+                           {unit_index+1}. {unit[unit.material_type].title}</Link>
                     }else{
                         return<Link to={`/lesson/${index+1}/${unit.material_type}/${unit[unit.material_type].id}`} key={unit.id}>
-                            {unit[unit.material_type].name}</Link>
+                           {unit_index+1}. {unit[unit.material_type].name}</Link>
                     }
                 }
             }) 

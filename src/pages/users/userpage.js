@@ -83,6 +83,7 @@ if(!user.logedin){
     <>
     {data ? 
       <div>
+        <p style={{textAlign:'right',padding:'5px'}}>Welcome, {user.first_name} {user.last_name}</p>
         <div className="flex_container purchased">
 
       <div className="course_sets">

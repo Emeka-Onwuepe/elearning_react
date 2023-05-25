@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import { addComas, clearCart, updateCart } from "../../features/cart/cartSlice"
-import { useProcessPurchaseMutation } from "../../features/api/apiSlice"
+import { addComas, clearCart, updateCart, updatePayment } from "../../features/cart/cartSlice"
+import { useDeletePurchaseMutation, useProcessPurchaseMutation } from "../../features/api/apiSlice"
 import { useEffect, useState } from "react"
 import { addAlert } from "../../features/alert/alertSlice"
 import { Link, Navigate } from "react-router-dom"
@@ -22,6 +22,7 @@ const Cart = () => {
 
     const dispatch = useDispatch()
     const [processPurchase,{isLoading,isError,data,error}]= useProcessPurchaseMutation()
+    const [deletePurchase] =  useDeletePurchaseMutation()
 
     const [sucess, setsucess] = useState(false)
 
@@ -52,12 +53,22 @@ const Cart = () => {
         currency: 'NGN',
     };
 
- 
     const initializePayment = usePaystackPayment(config)
     
     // you can call this function anything
     const onSuccess = (reference) => {
         const data = {purchase_id:reference.reference,action:'confirm'}
+
+        let {payment} = JSON.parse(localStorage.getItem("e_cart"))
+
+
+        if(payment.purchase_id == data.purchase_id ){
+          dispatch(updatePayment({purchase_id,status:'completed',
+                                  id:cart.payment.id}))
+        }else{
+          // this might never run
+          deletePurchase({id:payment.id,token:user.usertoken})
+        }
         const res = processPurchase({data,token:user.usertoken})
         res.unwrap().then(res=>{
           dispatch(clearCart())
@@ -66,14 +77,24 @@ const Cart = () => {
             message: 'Purchased Successfully'
           }))
 
+          
             setsucess(true)
+            
 
       })
         .catch(err=>{console.log(err)})
     };
   
     const onClose = () => {
-      console.log('closed')
+      let {payment} = JSON.parse(localStorage.getItem("e_cart"))
+      if(payment.status == 'pending' ){
+        dispatch(addAlert({status_code:100,
+          message: `Your transaction with ID: ${payment.purchase_id}
+          was unsuccessful`}))
+         }
+
+        dispatch(updatePayment({purchase_id:'',status:null,
+        id:null}))
     }
 
     const removeItem = (e)=>{
@@ -105,8 +126,7 @@ const Cart = () => {
                                                 id:item.id,
                                                 type:item.type
                                               }))
-       
-        console.log(items)
+                                              
         const data = {purchase_id,total,items,action:'create'}
         let res = {data :{created:false}}
 
@@ -119,10 +139,17 @@ const Cart = () => {
         }))
       }
     if (res.data.created){
-        initializePayment(onSuccess, onClose)
+      if(cart.payment.status == 'pending'){
+        deletePurchase({id:cart.payment.id,token:user.usertoken}) 
+      }
+
+      dispatch(updatePayment({purchase_id,id:res.data.id,status:'pending'}))
+      initializePayment(onSuccess, onClose)
         
     }
     }
+
+   
 
     if(!user.logedin){
         return  <Navigate to={'/login'} />
