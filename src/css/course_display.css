@@ -88,15 +88,10 @@
     
 }
 
-.purchased{
-    /* background-color: #65d0fa; */
-}
 
 .category{
     
-    padding: 0px 10px 10px 10px;
-   
-    
+    padding: 0px 10px 10px 10px;  
 }
 
 .product_category{
@@ -107,14 +102,26 @@
     
 }
 
-.course_units a {
-display: block;
-margin-bottom: 10px;
-}
 
+.course_units  {
+    background-color: #10a5df3d; 
+    padding: 10px;
+    margin-bottom: 10px;
+    }
+
+.course_units .active{
+    background-color: #13afec;
+}
 .course_set_item{
     border: 2px dotted #13afec;
 }
+
+.course_units a {
+    display: block;
+    margin-bottom: 5px;
+    padding: 5px;
+    }
+
 
 .popup{
     margin: 0px;
@@ -148,3 +155,11 @@ margin-bottom: 10px;
 #purchase_history span{
     color: #137399;
 }
+
+
+@media screen and (min-width:641px) {
+    .course_sidenav{
+        width: 20%;
+    }
+}
+

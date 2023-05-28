@@ -133,9 +133,9 @@ export const elearningApi = createApi({
       }
     }), 
     
-    getlesson : builder.query({
+    getSections : builder.query({
       query: data =>({
-        url: `/api/getlesson?id=${data.id}&type=${data.type}`,
+        url: `/api/getsection?id=${data.id}`,
         headers: {"Authorization": `Token ${data.token}`}
       }),
      
@@ -216,7 +216,7 @@ export const elearningApi = createApi({
 export const {useLoginMutation,useRegisterUserMutation,
               useRegisterStudentMutation,useGetSchoolQuery,
               useGetCoursesQuery, useGetCourseQuery,useLogoutMutation,
-              useGetlessonQuery, useSetUserMutation,
+              useGetSectionsQuery, useSetUserMutation,
               useProcessPurchaseMutation,useGetPurchasesQuery,
               useGetcategoryQuery, useDeletePurchaseMutation,
               } = elearningApi

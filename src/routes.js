@@ -24,9 +24,13 @@ export const AppRoutes =createBrowserRouter (
         <Route path="purchasehistory" element={<PurchaseHistory />} />
         <Route path="register" element={<RegisterUser />} />
         <Route path="register/:schoolId" element={<RegisterStudent />} />
-        <Route path="course/:id" element={<Course />} />
+        <Route path="course/:id" element={<Course />} >
+            <Route  path="lesson/:week/:type/:lesson_id" element={<Lesson />} />
+            <Route index element={<Lesson />} />
+            
+        </Route>
         <Route path="category/:id/:category" element={<Category />} />
-        <Route path="lesson/:week/:type/:id" element={<Lesson />} />
+        
       </Route>
   )
   );

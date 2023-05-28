@@ -68,7 +68,9 @@ input[type = checkbox]{
     margin: 5px 5px 5px 2px;
 }
 
-
+input[placeholder] {
+    text-align: center;
+}
 /* .submitButton{
 
 } */
