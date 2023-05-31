@@ -93,6 +93,7 @@ export const elearningApi = createApi({
             elem.name = course.name
             elem.weeks = course.course_week.length
             elem.display_image = course.display_image
+            elem.description = course.description
           })
         })
       return {course_sets,uniques,
@@ -136,6 +137,14 @@ export const elearningApi = createApi({
     getSections : builder.query({
       query: data =>({
         url: `/api/getsection?id=${data.id}`,
+        headers: {"Authorization": `Token ${data.token}`}
+      }),
+     
+    }), 
+
+    getArticle: builder.query({
+      query: data =>({
+        url: `/api/getarticle?id=${data.id}`,
         headers: {"Authorization": `Token ${data.token}`}
       }),
      
@@ -219,4 +228,5 @@ export const {useLoginMutation,useRegisterUserMutation,
               useGetSectionsQuery, useSetUserMutation,
               useProcessPurchaseMutation,useGetPurchasesQuery,
               useGetcategoryQuery, useDeletePurchaseMutation,
+              useGetArticleQuery,
               } = elearningApi

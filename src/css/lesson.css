@@ -1,6 +1,6 @@
 #lesson{
     background-color: white;
-    padding: 10px;
+    padding: 20px;
     min-height: 300px;
     width: 100%;
     margin-top: 10px;
@@ -13,6 +13,14 @@
 }
 
 @media screen and (min-width:641px) {
+  
+    #lesson{
+        width: 73%;
+    }
+}
+
+
+@media screen and (min-width:800px) {
   
     #lesson{
         width: 78%;

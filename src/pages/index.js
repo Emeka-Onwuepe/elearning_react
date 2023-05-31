@@ -9,7 +9,7 @@ function Index() {
     <Header/>
    
     <p className="seperator"></p>
-    {/* <NetworkReport /> */}
+    <NetworkReport />
     <Alert/>
     <main>
     <Outlet/>

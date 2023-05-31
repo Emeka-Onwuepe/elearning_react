@@ -68,10 +68,14 @@ header {
 }
 
 nav{
-  width: 350px;
+  /* width: 350px; */
   display: flex;
   justify-content:space-evenly ;
   align-items: center;
+}
+
+nav a{
+  margin-left: 10px;
 }
 
 .cart-shop {
@@ -86,7 +90,12 @@ nav{
   padding: 1px 7px;
   border-radius: 50%;
   top: 20px;
-  right: 225px;
+  margin-left: -15px;
+}
+
+.logo_div img{
+  width: 100px;
+  height: auto;
 }
 
 .seperator{
@@ -139,10 +148,14 @@ button{
     font-size: 30px;
 } 
 
-.removeItem{
+.removeItem,.offline{
   background-color: #e64a4abd;
 }
-
+.offline{
+  color:white;
+  padding: 5px;
+  text-align: center;
+}
 .purchaseHistory{
   background-color: #7895ec;
   margin: 10px auto;
@@ -167,3 +180,26 @@ footer img{
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
+
+
+@media screen and (min-width:360px) {
+  
+  .logo_div img{
+    width: 120px;
+  }
+  nav a{
+    margin-left: 15px;
+  }
+  
+}
+
+@media screen and (min-width:641px) {
+  
+  .logo_div img{
+    width: 150px;
+  }
+
+  nav a{
+    margin-left: 30px;
+  }
+}

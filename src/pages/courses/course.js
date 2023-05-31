@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { addCourse, setDefaultLesson } from "../../features/course/courseSlice"
 import { addAlert } from "../../features/alert/alertSlice"
+import Loading from "../loading"
 
 
 const Course = () => {
@@ -17,6 +18,31 @@ const Course = () => {
   const {data,isError,error}  = useGetCourseQuery({id,token},{skip})
 
   // const finaldata = skip?course:data
+  const limit = 640
+
+const [windowSize, setWindonSize] = useState({'width':window.innerWidth,'height':window.innerHeight})
+const [display, setdisplay] = useState({sideNav: window.innerWidth>limit?true:false,
+                                        closeButton: window.innerWidth>limit?false:true,
+                                        hamba: window.innerWidth>limit?false:true,
+                                      })
+
+const setWindowSize = () => {
+  setWindonSize({'width':window.innerWidth,'height':window.innerHeight})
+  setdisplay({sideNav: window.innerWidth>limit?true:false,
+              closeButton: window.innerWidth>limit?false:true,
+              hamba: window.innerWidth>limit?false:true,
+  })
+}
+
+useEffect(() => {
+  window.addEventListener('resize', setWindowSize);
+  return () => {
+    window.removeEventListener('resize', setWindowSize)
+  }
+}, [])
+
+
+
 
   useEffect(() => {
     if(skip){
@@ -60,8 +86,6 @@ const Course = () => {
 
     let params = {week:1,type:unit.material_type,lesson_id:unit[unit.material_type].id}
     dispatch(setDefaultLesson(params))
-    console.log('hello')
-
   
         // let elem = document.getElementsByClassName("0-0")
         // elem.Sle.display = 'none'
@@ -82,18 +106,34 @@ const Course = () => {
    }
 
 
-   
 
   return (
     <>
+   {display.hamba?
+    <div id="toggle" onClick={()=>setdisplay({sideNav: !display.sideNav,
+      closeButton: true,
+      hamba: display.hamba,
+        })} className="toggle">
+      <span></span>
+      <span></span>
+      <span className="last"></span>
+  </div>
+   
+   :""} 
     {finaldata ? 
     <div className="course_page flex_container">
 
-   
+      {display.sideNav?
       <div className="flex_container course_sidenav">
+        {display.closeButton?<button  id="close" className="close"
+                               onClick={()=>setdisplay({sideNav: !display.sideNav,
+                                                               closeButton: false,
+                                                              hamba: display.hamba,
+                 })}>&times;</button>:""}
+                 
       {finaldata.course.course_week.map((elem,index) => (
         <div className="course_units" key={elem.id}>
-      <h3 key={elem.id}  >{elem.name} <span className="lesser">{`(week ${index+1})`}</span></h3>
+      <h3 className="center" key={elem.id}  >{elem.name} <span className="lesser">{`(week ${index+1})`}</span></h3>
         {elem.course_unit.map((unit,unit_index)=>{
           
             let [select_unit] = finaldata.units.filter(item=>item.id == unit)
@@ -115,11 +155,12 @@ const Course = () => {
       )
       )}
       </div>
+    :''}
 
         <Outlet/>
 
       </div>
-    :<h1>Loading</h1>}
+    :<Loading/>}
    </>
   )
 }

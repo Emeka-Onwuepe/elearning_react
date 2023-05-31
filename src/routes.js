@@ -12,6 +12,7 @@ import Lesson from "./pages/courses/lesson";
 import Cart from "./pages/cart/cart";
 import PurchaseHistory from "./pages/cart/purchaseHistory";
 import Category from "./pages/courses/category";
+import ViewArticle from "./pages/courses/viewArticle";
 
 
 export const AppRoutes =createBrowserRouter (
@@ -30,6 +31,7 @@ export const AppRoutes =createBrowserRouter (
             
         </Route>
         <Route path="category/:id/:category" element={<Category />} />
+        <Route path="admin/article/:id" element={<ViewArticle />} />
         
       </Route>
   )

@@ -46,11 +46,12 @@ const onClick = async (e)=>{
 
       <NavLink to={user.logedin?'userpage':'/'}>
 
-      <div className="logo-div"><img src={require("../css/logo.png")} width='150px' alt="logo" /></div>
+      <div className="logo_div"><img src={require("../css/logo.png")} alt="logo" /></div>
       </NavLink>
 
       
       <nav className="navs">
+      <NavLink to="contact">Contact</NavLink>
         {user.logedin?
         <>
       
@@ -62,6 +63,7 @@ const onClick = async (e)=>{
         </div>
         <NavLink onClick={onClick} >Logout</NavLink></>: path !='/login'?
         <NavLink to="login">Login</NavLink>: ''}
+        
     </nav>
     </header>
   )

@@ -11,19 +11,16 @@ const NetworkReport =() => {
     };
   }, [status]);
   return (
-    <div>
+    <>
     
       {status ? 
-          <div className="">
-            Network is fullly connected
-          </div>
-    
+      ''
       : 
-        <div className="">
-        your are offline
+        <div className="offline">
+        You are offline
       </div>
       }
-    </div>
+    </>
   );
 }
 export default NetworkReport;

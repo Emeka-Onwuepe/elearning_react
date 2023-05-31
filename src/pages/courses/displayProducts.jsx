@@ -63,27 +63,27 @@ const DisplayProducts = ({products}) => {
           <Link to={`/category/${cat.category_id}/${cat.category}`}>{cat.category}</Link></h2>
         <div className='category flex_container'>
 
-        <div className=''>
+        
         {cat.singles.map((single,index)=>(
             <div className='flex_item' key={index}>
                <img src={single.display_image} alt="img"  />
                 <p>{single.name}</p>
-                <p>{addComas(single.price)}</p>
+                <p><span className='shiftNairaR'>&#8358;</span> {addComas(single.price)}</p>
                 <p className='course-type'>course</p>
                 <button id={`${c_index}-singles-${index}`} 
                  onClick={addtoCart}>Add to cart</button>
+                 <p className='lesser description'>{single.description}</p>
             </div>
         ))}
-        </div>
+        
 
-       <div className='courses '>
+       
        {cat.course_sets.map((course_set,index)=>(
        
             <div className='flex_item course_set_item' key={index}>
               <img src={course_set.display_image} alt="img"  />
                 <p>{course_set.name}</p>
-                <p>{addComas(course_set.price)}</p>
-              
+                <p><span  className='shiftNairaR'>&#8358;</span> {addComas(course_set.price)}</p>
                 <div className="flex_container_inner no_margin">
                 <p className='course-type'>course_set</p>
                 <button className="viewCourses" key='button' onClick={displayCourses} id={`${c_index}-${index}`}>View courses</button>
@@ -92,10 +92,11 @@ const DisplayProducts = ({products}) => {
 
                 <button id={`${c_index}-course_sets-${index}`} 
                 onClick={addtoCart}>Add to cart</button>
+                 <p  className='lesser description'>{course_set.description}</p>
             </div>
             
         ))}
-       </div>
+       
 
        </div>
 
@@ -115,8 +116,9 @@ const DisplayProducts = ({products}) => {
          
            <img src={item.course.display_image} alt="img"  />
              <p>{item.course.name}</p>
-             <p>{addComas(item.course.price)}</p>
+             <p><span className='shiftNairaR'>&#8358;</span>{addComas(item.course.price)}</p>
              <p>course</p>
+             <p className='lesser description'>{item.course.description}</p>
          </div>
          
      ))}

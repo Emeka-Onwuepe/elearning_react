@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { addAlert } from "../../features/alert/alertSlice"
 import { addComas, addTOCartFun } from "../../features/cart/cartSlice"
+import Loading from "../loading"
 
 const Category = () => {
     const{id,category} = useParams()
@@ -147,34 +148,34 @@ const Category = () => {
 
       <div className='category flex_container'>
 
-      {!exclude.courses? 
-      <div className=''>
+      {!exclude.courses && data.courses.length>0? 
+        <>
         {data.courses.map((single,index)=>(
         
            
             <div className='flex_item' key={index}>
                <img src={single.display_image} alt="img"  />
                 <p>{single.name}</p>
-                <p>{addComas(single.price)}</p>
+                <p><span className='shiftNairaL'> &#8358;</span>{addComas(single.price)}</p>
                 <p>course</p>
                 <button id={`courses-${index}`} 
                  onClick={addtoCart}>Add to cart</button>
+                 <p className='lesser description'>{single.description}</p>
             </div>
         ))}
-        </div>
+        </>
         :""} 
 
 
 
-    {!exclude.course_sets? 
-       <div className='courses '>
+    {!exclude.course_sets && data.course_sets.length>0? 
+       <>
        {data.course_sets.map((course_set,index)=>(
         
             <div className='flex_item course_set_item' key={index}>
               <img src={course_set.display_image} alt="img"  />
                 <p>{course_set.name}</p>
-                
-                <p>{addComas(course_set.price)}</p>
+                <p><span className='shiftNairaL'>&#8358;</span>{addComas(course_set.price)}</p>
 
                 <div className="flex_container_inner no_margin">
                 <p className='course-type'>course_set</p>
@@ -183,16 +184,17 @@ const Category = () => {
 
                 <button id={`course_sets-${index}`} 
                 onClick={addtoCart}>Add to cart</button>
+                <p className='lesser description'>{course_set.description}</p>
             </div>
               
         ))}
-       </div>
+       </>
 
         :""} 
        </div>
 
     </>
-    :""}
+    :<Loading/>}
 
     {selected && display?
     <div className="pop_container">  
@@ -205,8 +207,9 @@ const Category = () => {
          
            <img src={item.course.display_image} alt="img"  />
              <p>{item.course.name}</p>
-             <p>{addComas(item.course.price)}</p>
+             <p><span className='shiftNairaL'> &#8358;</span>{addComas(item.course.price)}</p>
              <p>course</p>
+             <p className='lesser description'>{item.course.description}</p>
          </div>
          
      ))}

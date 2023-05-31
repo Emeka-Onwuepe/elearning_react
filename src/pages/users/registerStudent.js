@@ -4,6 +4,7 @@ import { useRegisterUserMutation, useGetSchoolQuery } from '../../features/api/a
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser } from '../../features/user/userslice'
 import { addAlert } from '../../features/alert/alertSlice'
+import Loading from '../loading'
 
 const RegisterStudent = () => {
     const{schoolId} = useParams()
@@ -118,7 +119,7 @@ const RegisterStudent = () => {
         </fieldset>
         </div>
         : isLoading?
-        <h1>Loading</h1>
+        <Loading/>
         :''}
         </>
   )

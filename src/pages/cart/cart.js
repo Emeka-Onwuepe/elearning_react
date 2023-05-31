@@ -162,7 +162,7 @@ const Cart = () => {
     <div>
      {cart.total? 
      <div className="flex_container">
-      <p className="flex_item">Total: <span>&#8358;</span> {addComas(cart.total)}</p>
+      <p className="flex_item " style={{flexDirection:'row'}}>Total:  <span className="naira"> &#8358;</span> {addComas(cart.total)}</p>
 
       <div className="flex_item remove_bg ">
      
@@ -180,7 +180,7 @@ const Cart = () => {
             <div className="flex_item" key={index}>
               <img src={item.image} alt="img"  />
                 <p>{item.name}</p>
-                <p>{addComas(item.price)}</p>
+                <p><span> &#8358;</span>{addComas(item.price)}</p>
                 <p>{item.type}</p>
                 <button className="removeItem" id={`${item.category_id}-${item.type}-${item.id}`} 
                 onClick={removeItem}>Remove Item</button>

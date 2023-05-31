@@ -7,6 +7,7 @@ import { setPublicKeyAndCourses } from "../../features/course/courseSlice"
 import { createUser } from "../../features/user/userslice"
 import DisplayProducts from "../courses/displayProducts"
 import '../../css/course_display.css'
+import Loading from "../loading"
 
 const UserPage = () => {
   const user = useSelector(state=>state.user)
@@ -86,7 +87,7 @@ if(!user.logedin){
         <p style={{textAlign:'right',padding:'5px'}}>Welcome, {user.first_name} {user.last_name}</p>
         <div className="flex_container purchased">
 
-      <div className="course_sets">
+      {/* <div className="course_sets"> */}
       
       {data.course_sets.map(elem => (
         <div className="course_set" key={elem.id}>
@@ -100,6 +101,7 @@ if(!user.logedin){
           <p key={item.weeks}> Duration: {`${item.weeks} 
               ${item.weeks>1?'weeks':'week'}`}</p>
           <Link className="open_course" key={item.id + 'link'}  to={`/course/${item.id}`} >Open</Link>
+          <p className='lesser description'>{item.description}</p>
           </div>
         ))}
       </div>
@@ -107,10 +109,11 @@ if(!user.logedin){
 
       )
       )}
-   </div>
+   {/* </div> */}
   
       {data.uniques?
-      <div className="flex_container">
+      // <div className="flex_container">
+      <>
         {data.uniques.map(item=>(
           <div className="flex_item" id={item.id} key={item.id}>
            <img src={item.display_image} alt="img"  />
@@ -118,16 +121,18 @@ if(!user.logedin){
           <p key={item.course_week.length}> Duration: {`${item.course_week.length} 
               ${item.course_week.length>1?'weeks':'week'}`}</p>
           <Link className="open_course" key={item.id + 'link'}  to={`/course/${item.id}`} >Open</Link>
+          <p className='lesser description'>{item.description}</p>
           </div>
         ))}
-      </div> 
+        </>
+     
       :""}
+      
      </div>
-       
       <DisplayProducts products={data.available_courses} />
       </div>
     :noClass?<div><p>No content <button onClick={setuser}>Upgrade Account For Free</button> </p></div>
-    :<h1>Loading</h1>}
+    :<Loading/>}
    </>
   )
 }

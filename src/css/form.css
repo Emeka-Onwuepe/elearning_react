@@ -42,21 +42,24 @@ fieldset{
     flex-direction: column;
     justify-content: center;
     padding: 10px;
-    height: 75vh;
+    min-height: 75vh;
     border: 0px;
+    box-sizing: border-box;
 }
 
 form {
 	display: flex;
 	flex-direction: column;
-    width: 500px;
 }
 
 .extraLogs{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 500px;
+}
+
+form, .extraLogs{
+    width:100%;
 }
 
 #searchTitle{
@@ -71,6 +74,18 @@ input[type = checkbox]{
 input[placeholder] {
     text-align: center;
 }
-/* .submitButton{
 
-} */
+
+@media screen and (min-width:641px) {
+  
+    form, .extraLogs{
+        width: 500px;
+    }
+}
+
+@media screen and (max-width:330px) {
+  
+    fieldset{
+        padding: 0px;
+    }
+}
