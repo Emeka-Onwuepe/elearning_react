@@ -6,6 +6,9 @@ import { addAlert } from "../../features/alert/alertSlice"
 import { Link, Navigate } from "react-router-dom"
 import { usePaystackPayment } from "react-paystack"
 
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
 const Cart = () => {
     const cart = useSelector(state=>state.cart)
     const user = useSelector(state=>state.user)
@@ -98,25 +101,40 @@ const Cart = () => {
     }
 
     const removeItem = (e)=>{
-        let [cat_id,type,id] = e.target.id.split('-')
-        let cartItem = [...cart.products]
 
-        cart.products.forEach((item,index) => {
+      confirmAlert({
+        title: 'Confirm',
+        message: 'Are you sure you want to remove this from cart?.',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {
+              let [cat_id,type,id] = e.target.id.split('-')
+              let cartItem = [...cart.products]
+              cart.products.forEach((item,index) => {
             
-           if (item.id == id &&
-                item.category_id == cat_id && item.type == type ){
-                   
-                    let [deleted] = cartItem.splice(index,index+1)
-                    let updatedTotal = cart.total - deleted.price
-                    dispatch(updateCart({
-                        products: cartItem,
-                        total: updatedTotal
-                    }))
+                if (item.id == id &&
+                     item.category_id == cat_id && item.type == type ){
+                        
+                         let [deleted] = cartItem.splice(index,index+1)
+                         let updatedTotal = cart.total - deleted.price
+                         dispatch(updateCart({
+                             products: cartItem,
+                             total: updatedTotal
+                         }))
+                     }
+             });
 
 
-                  
-                }
-        });
+            }
+          },
+          {
+            label: 'No',
+            // onClick: () => alert('Click No')
+          }
+        ]
+      });
+        
     }
 
     const checkOut = async ()=>{

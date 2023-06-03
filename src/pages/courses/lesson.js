@@ -46,7 +46,7 @@ const navigate = useNavigate()
       {
         type ==='video' && lesson ?<VideoLesson data={lesson}/>
         : type=== 'article' && lesson ?<ArticleLesson data={lesson} token={user.usertoken}/> 
-        : type=== 'quiz' && lesson ? <Quiz data={lesson}/>
+        : type=== 'quiz' && lesson ? <Quiz course_id={id} data={lesson}/>
         : ''
       }
       

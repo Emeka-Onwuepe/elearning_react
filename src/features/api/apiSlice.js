@@ -208,6 +208,32 @@ export const elearningApi = createApi({
       // invalidatesTags: ['userlogin']
     }), 
 
+    getquizscore: builder.query({
+      query: data =>({
+        url: `/api/getquizscore?quiz_id=${data.quiz_id}&course_id=${data.course_id}`,
+        headers: {"Authorization": `Token ${data.token}`}
+      }),
+       
+    }),
+
+    quizView: builder.query({
+      query: data =>({
+        url: `/api/quizview?id=${data.id}`,
+        headers: {"Authorization": `Token ${data.token}`}
+      }),
+
+    }),
+
+    updateScore: builder.mutation({
+      query: data =>({
+        url: `/api/quizview`,
+        headers: {"Authorization": `Token ${data.token}`},
+        method:"POST",
+        body: data.data
+      }),
+
+    }),
+
     logout : builder.mutation({
       query: token =>({
         url: `/api/logout`,
@@ -228,5 +254,6 @@ export const {useLoginMutation,useRegisterUserMutation,
               useGetSectionsQuery, useSetUserMutation,
               useProcessPurchaseMutation,useGetPurchasesQuery,
               useGetcategoryQuery, useDeletePurchaseMutation,
-              useGetArticleQuery,
+              useGetArticleQuery, useQuizViewQuery,
+              useUpdateScoreMutation, useGetquizscoreQuery,
               } = elearningApi

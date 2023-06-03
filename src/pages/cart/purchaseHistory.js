@@ -2,6 +2,9 @@ import { useSelector } from "react-redux"
 import { useDeletePurchaseMutation, useGetPurchasesQuery } from "../../features/api/apiSlice"
 import { addComas } from "../../features/cart/cartSlice"
 
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
 const PurchaseHistory = () => {
     const user = useSelector(state => state.user)
     const token = user.usertoken
@@ -10,8 +13,24 @@ const PurchaseHistory = () => {
     const [deletePurchase] =  useDeletePurchaseMutation()
 
     const deleteOrder = (e) =>{
-      const id = e.target.id
-      deletePurchase({id,token})
+      
+      confirmAlert({
+        title: 'Confirm Delete',
+        message: 'Are you sure you want to delete this?.',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {
+              const id = e.target.id
+              deletePurchase({id,token})
+            }
+          },
+          {
+            label: 'No',
+            // onClick: () => alert('Click No')
+          }
+        ]
+      });
     }
    
  

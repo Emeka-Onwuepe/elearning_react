@@ -5,8 +5,6 @@ import { logoutUser } from '../features/user/userslice'
 import { useLogoutMutation } from '../features/api/apiSlice'
 import { resetCourse } from '../features/course/courseSlice'
 import { addAlert } from '../features/alert/alertSlice'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping, faPenNib, faShoppingBasket, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 
 const Header = () => {
