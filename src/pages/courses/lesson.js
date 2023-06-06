@@ -35,9 +35,9 @@ const Lesson = () => {
 
 
 const navigate = useNavigate()
-//  if(!user.logedin | lesson == null ){
-//   return  <Navigate to={'/login'} />
-//  }
+ if(!user.logedin | lesson == null ){
+  return  <Navigate to={'/login'} />
+ }
 
 
   return (

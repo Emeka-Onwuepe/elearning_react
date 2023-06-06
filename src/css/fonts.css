@@ -26,6 +26,10 @@ button,.open_course,
     font-size: 14px;
 }
 
+.lesser2{
+    font-size: 12px;
+}
+
 .center{
     text-align: center;
 }
@@ -52,6 +56,10 @@ h4 {
     .Toastify__toast-body div,
     .lesser{
         font-size: 15px;
+    }
+
+    .lesser2{
+        font-size: 13px;
     }
 
     h3,

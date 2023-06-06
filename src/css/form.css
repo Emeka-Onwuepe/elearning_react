@@ -36,6 +36,13 @@ textarea {
     padding: 10px;
 }
 
+ol input[type=radio],
+ol input[type=checkbox]{
+    height: unset;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+
 fieldset{
     display: flex;
     align-items: center;

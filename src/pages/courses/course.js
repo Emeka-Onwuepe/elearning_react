@@ -86,17 +86,7 @@ useEffect(() => {
 
     let params = {week:1,type:unit.material_type,lesson_id:unit[unit.material_type].id}
     dispatch(setDefaultLesson(params))
-  
-        // let elem = document.getElementsByClassName("0-0")
-        // elem.Sle.display = 'none'
-        // console.log(elem)
-     
-      
-    // return  <Navigate to={'/userpage'} />
-    
-    // return  <Navigate to={`/course/${id}/lesson2/1/${}/${}`} />
-    
-    // `/course/${id}/lesson/${nextWeek}/${nextType}/${nextId}`
+
    }
 }, [finaldata])
 

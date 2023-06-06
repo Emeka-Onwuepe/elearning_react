@@ -12,6 +12,57 @@
 	margin-top: 10px;
 }
 
+.controls button{
+    background-color: #506cc1;
+}
+
+ol{
+    padding-left: 10px;
+  }
+
+li,.options{
+    padding: 5px;
+}
+
+.questions{
+    /* margin-bottom: 10px; */
+    padding: 10px;
+}
+
+.questions:nth-child(even){
+    background-color: #f8f8f8;
+}
+
+.correct,
+.wrong,.retake{
+    padding: 4px;
+    color: white;
+}
+
+
+.correct{
+    background-color: #1b9d1b;
+}
+
+.wrong{
+    background-color: #e64a4abd;
+   
+}
+
+.retake{border-radius: 10px;
+    margin: 2px;
+    background-color: #506cc1;
+
+}
+
+.submit_quiz {
+margin: 10px 47%
+}
+
+.scoreboard{
+background-color: #f8f8f8;
+padding-bottom: 0px;
+}
 @media screen and (min-width:641px) {
   
     #lesson{

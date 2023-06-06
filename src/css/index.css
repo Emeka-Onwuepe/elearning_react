@@ -65,6 +65,7 @@ header {
 	padding: 0px 10px;
 	justify-content: space-between;
   background-color: #13afec;
+  z-index: 1;
 }
 
 nav{
