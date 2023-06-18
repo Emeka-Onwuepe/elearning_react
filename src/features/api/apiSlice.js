@@ -11,7 +11,7 @@ export const elearningApi = createApi({
         return headers
     }
     }),
-  tagTypes: ['userlogin','getCourses','getPurchases'],
+  tagTypes: ['userlogin','getCourses','getPurchases','get_score'],
   endpoints: (builder) => ({
 
     login: builder.mutation({
@@ -150,6 +150,14 @@ export const elearningApi = createApi({
      
     }), 
 
+    getMaterial: builder.query({
+      query: data =>({
+        url: `/api/getmaterial?id=${data.id}&type=${data.type}`,
+        headers: {"Authorization": `Token ${data.token}`}
+      }),
+     
+    }), 
+
     setUser : builder.mutation({
       query: token =>({
         url: `/api/setuser`,
@@ -216,6 +224,14 @@ export const elearningApi = createApi({
        
     }),
 
+    getCourseScore: builder.query({
+      query: data =>({
+        url: `/api/getcoursescore?course_id=${data.course_id}`,
+        headers: {"Authorization": `Token ${data.token}`}
+      }),
+      providesTags:['get_score']
+    }),
+
     quizView: builder.query({
       query: data =>({
         url: `/api/quizview?id=${data.id}`,
@@ -231,7 +247,7 @@ export const elearningApi = createApi({
         method:"POST",
         body: data.data
       }),
-
+      invalidatesTags: ['get_score']
     }),
 
     logout : builder.mutation({
@@ -256,4 +272,5 @@ export const {useLoginMutation,useRegisterUserMutation,
               useGetcategoryQuery, useDeletePurchaseMutation,
               useGetArticleQuery, useQuizViewQuery,
               useUpdateScoreMutation, useGetquizscoreQuery,
+              useGetCourseScoreQuery,useGetMaterialQuery
               } = elearningApi

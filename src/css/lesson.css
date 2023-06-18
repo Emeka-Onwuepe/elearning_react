@@ -1,7 +1,7 @@
 #lesson{
     background-color: white;
     padding: 20px;
-    min-height: 300px;
+    min-height: 250px;
     width: 100%;
     margin-top: 10px;
 }
@@ -63,11 +63,18 @@ margin: 10px 47%
 background-color: #f8f8f8;
 padding-bottom: 0px;
 }
+
+.video_lesson{
+        width: 100%;
+        height: auto;
+        /* margin-top: 10px; */
+}
 @media screen and (min-width:641px) {
   
     #lesson{
         width: 73%;
     }
+ 
 }
 
 
@@ -76,4 +83,13 @@ padding-bottom: 0px;
     #lesson{
         width: 78%;
     }
+
+}
+
+@media screen and (min-width:1000px) {
+  
+    .video_lesson{
+        width: 85%;
+        height: auto;
+}
 }

@@ -33,35 +33,41 @@ const Lesson = () => {
   const nextLesson = useSelector(state=>getNextLesson(state,week,type,lesson_id))
   const [nextWeek,nextId, nextType] = nextLesson
 
+  const nextLink = nextId? `/course/${id}/lesson/${nextWeek}/${nextType}/${nextId}` : null
+
 
 const navigate = useNavigate()
- if(!user.logedin | lesson == null ){
+ if(!user.logedin){
   return  <Navigate to={'/login'} />
  }
 
 
   return (
+ 
     <div id='lesson'>
-   
-      {
-        type ==='video' && lesson ?<VideoLesson data={lesson}/>
-        : type=== 'article' && lesson ?<ArticleLesson data={lesson} token={user.usertoken}/> 
-        : type=== 'quiz' && lesson ? <Quiz course_id={id} data={lesson}/>
-        : ''
-      }
-      
-      <div className='controls'>
-      <button onClick={()=>navigate(-1)}>Back</button>
-      {
+   {lesson?
+    <>
+    
+    {
+      type ==='video' && lesson ?<VideoLesson data={lesson} token={user.usertoken} nextLink={nextLink}/>
+      : type=== 'article' && lesson ?<ArticleLesson data={lesson} token={user.usertoken}/> 
+      : type=== 'quiz' && lesson ? <Quiz course_id={id} data={lesson}/>
+      : ''
+    }
+    
+    <div className='controls'>
+    <button onClick={()=>navigate(-1)}>Back</button>
+    {
 
-        nextId?
-        <Link to={`/course/${id}/lesson/${nextWeek}/${nextType}/${nextId}`} >
-                         <button>Next</button></Link>
-        : ''
-      }
-      </div>
-     
-      
+      nextLink?
+      <Link to={nextLink} >
+                       <button>Next</button></Link>
+      : ''
+    }
+    </div>
+   
+    </>
+    :""}
     </div>
   )
 }

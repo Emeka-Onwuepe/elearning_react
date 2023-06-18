@@ -1,5 +1,5 @@
 import { NavLink, Navigate, Outlet, useParams } from "react-router-dom"
-import { useGetCourseQuery } from "../../features/api/apiSlice"
+import { useGetCourseQuery, useGetCourseScoreQuery } from "../../features/api/apiSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { addCourse, setDefaultLesson } from "../../features/course/courseSlice"
@@ -15,7 +15,9 @@ const Course = () => {
 
   const skip = course.course.id == id
   const [finaldata, setfinaldata] = useState(null)
+  const [courseScore,setcourseScore] = useState({ id: '', agg_score: 0 })
   const {data,isError,error}  = useGetCourseQuery({id,token},{skip})
+  const {data:course_score} = useGetCourseScoreQuery({token,course_id:id})
 
   // const finaldata = skip?course:data
   const limit = 640
@@ -41,7 +43,12 @@ useEffect(() => {
   }
 }, [])
 
-
+useEffect(() => {
+  if(course_score){
+    setcourseScore(course_score)
+  }
+  
+}, [course_score])
 
 
   useEffect(() => {
@@ -111,6 +118,8 @@ useEffect(() => {
    
    :""} 
     {finaldata ? 
+    <>
+    <p style={{textAlign:'right',marginRight:'5px'}}>Course Performance: {courseScore.agg_score}%</p>
     <div className="course_page flex_container">
 
       {display.sideNav?
@@ -150,6 +159,7 @@ useEffect(() => {
         <Outlet/>
 
       </div>
+      </>
     :<Loading/>}
    </>
   )
